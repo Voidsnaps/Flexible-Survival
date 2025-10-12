@@ -310,8 +310,9 @@ Include Fair Events by Sarokcat.
 Include Fair Events by Sarokcat.
 Include Female Dorm Events by Prometheus.
 Include Feral Events by Guest Writers.
-Include Firbolgs by OrangeHorned.
 Include Fire House by Kaleem Mcintyre.
+Include Firbolg Quests by Orangehorned.
+Include Firbolg Tapes by Orangehorned.
 Include Food and Water Finding by Nuku Valente.
 Include Forest Events by Aureas Gigas.
 Include Forest Events by Defth.
@@ -430,6 +431,7 @@ Include Awesome Tree by Damaged.
 Include Badger by StripeGuy.
 Include Bald Eagle by Stripes.
 Include Batcubus by Blaydrex.
+Include Beag Infection by OrangeHorned.
 Include Biolizardman Brute by Gherod.
 Include Brown Bear by Nuku Valente.
 Include Beaver by Stripes.
@@ -496,6 +498,7 @@ Include Elven Hunter by Wahn.
 Include Enhanced Chimera by Stripes.
 Include Erica by Wahn.
 Include Ewe by Luneth.
+Include Fathnach Infection by OrangeHorned.
 Include Feline Gymnast by Guest Writers.
 Include Female Husky by Nuku Valente.
 Include Fennec by Stripes.
@@ -752,6 +755,7 @@ Include Zebra by Luneth.
 
 Part 4 - NPCs
 
+
 Include Absinthe by Bigfish15079.
 Include Ace by Aureas Gigas.
 Include Adam by Wahn.
@@ -868,8 +872,8 @@ Include Galaxite by Sundered Dragon.
 Include Genevieve by Prometheus.
 Include Garrett by SgtPepper234.
 Include Gerty by Qazarar.
-Include Giving Firbolg by OrangeHorned.
 Include Glory by Wahn.
+Include Giving by Orangehorned.
 Include Good Alexandra by Prometheus.
 Include Gordon by Rikaeus.
 Include Gregory by Wahn.
@@ -921,6 +925,7 @@ Include Kathy by Sundered Dragon.
 Include Keiran by Voidsnaps.
 Include Kerr & Talov by Wahn.
 Include Kerry by Voidsnaps.
+Include Knott by Orangehorned.
 Include Kosk by Voidsnaps.
 Include Krampus by Wahn.
 Include Kristen by Stripes.
@@ -937,6 +942,7 @@ Include Lindsey by Prometheus.
 Include Lingau by Wahn.
 Include Logan by Wahn.
 Include Lucy by Stripes.
+Include Luke by Alexeo.
 Include Lumi by Prometheus.
 Include Lux & Umbra by Prometheus.
 Include Mack by Stripes.
@@ -1059,6 +1065,16 @@ Include Zephias by Wahn.
 Include Zigor by Stripes.
 Include Ziix by Voidsnaps.
 Include Zoe by Kernog.
+
+[Inactivated until further developments]
+[
+Include Beag Infection by OrangeHorned.
+Include Fathnach Infection by OrangeHorned.
+Include Giving Firbolg by OrangeHorned.
+Include Knott by OrangeHorned.
+Include Firbolg Quests by OrangeHorned.
+Include Firbolg Tapes by OrangeHorned.
+]
 
 Part 5 - Companions and Allies
 

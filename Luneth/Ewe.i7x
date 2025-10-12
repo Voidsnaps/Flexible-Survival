@@ -70,7 +70,7 @@ When Play begins:
 	now attack entry is "[one of]She moves forward and rubs her soft wool over your body.[or]She lowers her head down and charges, knocking you back.[or]The ewe eyes you carefully before striking at your weak spots![or]The naked ewe pauses and strokes her soft wool teasingly, distracting you from the fight![or]The ewe windmills her arms as she charges forward, somehow managing to land a lucky blow.[at random]";
 	now defeated entry is "[ewe loss]";
 	now victory entry is "[ewe attack]";
-	now desc entry is "";
+	now desc entry is "[Ewe_desc]";
 	now face entry is "short black muzzle"; [ Face description, format as "Your face is [Face of Player]." ]
 	now body entry is "stocky, but feminine, with lovely curves to your body. Your arms are thinner, ending in dainty, hoof-like hands which struggle to handle items at times. Your legs have strong thighs for leaping and crossing rough terrain and slender calves ending in dark hooves";
 	now skin entry is "[one of]woolly[or]soft wool[or]white fleeced[at random]";
@@ -106,7 +106,7 @@ When Play begins:
 	now loot entry is "tainted wool";
 	now lootchance entry is 20;
 	now MilkItem entry is "ewe milk"; [ Item to be given to the player if they have this infection and milk themselves. ]
-	now CumItem entry is ""; [ Item to be given to the player if they have this infection and jerk off. ]
+	now CumItem entry is "ewe cum"; [ Item to be given to the player if they have this infection and jerk off. ]
 	now TrophyFunction entry is "-"; [ Function to generate a list of optional loot items, of which the player can choose one after victory. ]
 	now scale entry is 3; [ Number 1-5, approx size/height of infected PC body: 1=tiny, 3=avg, 5=huge ]
 	now body descriptor entry is "[one of]stocky[or]cute[at random]";

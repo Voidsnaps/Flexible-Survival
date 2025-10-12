@@ -27,16 +27,12 @@ to say losetoJaguarWarrior:
 	say "     [if HP of Player > 0]Unable to resist[else]Beaten by[end if] the jaguar warrior, you are helpless as he strips you of your gear. [run paragraph on]";
 	if anallevel is 3 and a random chance of 1 in 3 succeeds:
 		say "[JagWarVic_Anal]";
-		NPCSexAftermath Player receives "AssFuck" from Tehuantl;
 	else if Player is female and a random chance of 2 in 3 succeeds:
 		say "[JagWarVic_Vag]";
-		NPCSexAftermath Player receives "PussyFuck" from Tehuantl;
 	else if anallevel > 1 and a random chance of 1 in 4 succeeds:
 		say "[JagWarVic_Anal]";
-		NPCSexAftermath Player receives "AssFuck" from Tehuantl;
 	else:
 		say "[JagWarVic_Oral]";
-		NPCSexAftermath Player receives "OralCock" from Tehuantl;
 
 to say beattheJaguarWarrior:
 	if HP of Tehuantl is 1:
@@ -327,7 +323,7 @@ When Play begins:
 	now loot entry is "jaguar warrior fur"; [ Dropped item, blank for none. Case sensitive. ]
 	now lootchance entry is 50; [ Percentage chance of dropping loot, from 0-100. ]
 	now MilkItem entry is "jaguar warrior milk"; [ Item to be given to the player if they have this infection and milk themselves. ]
-	now CumItem entry is ""; [ Item to be given to the player if they have this infection and jerk off. ]
+	now CumItem entry is "jaguar warrior cum"; [ Item to be given to the player if they have this infection and jerk off. ]
 	now TrophyFunction entry is "-"; [ Function to generate a list of optional loot items, of which the player can choose one after victory. ]
 	now scale entry is 3; [ Number 1-5, approx size/height of infected PC body: 1=tiny, 3=avg, 5=huge ]
 	now body descriptor entry is "[one of]sleek[or]lithe[or]alluring[at random]"; [ Ex: "plump" "fat" "muscled" "strong" "slimy" "gelatinous" "slender". Use [one of] to vary ]
@@ -481,7 +477,7 @@ An everyturn rule:
 				say "     You drop to a knee as you feel a surge of heat roll through you, your feline physique shifting as the power of the jaguar headdress you're wearing ripples through your feline body, remaking you into a powerful jungle predator.";
 			setmonster "Jaguar Warrior";
 			choose row MonsterID from the Table of Random Critters;
-			if "Female Preferred" is not listed in feats of Player:
+			if Player is not FemalePreferred:
 				now sex entry is "Both";
 			now hoodequipped is 1;
 		infect "Jaguar Warrior";
@@ -491,7 +487,7 @@ An everyturn rule:
 		now hoodequipped is 0;
 		setmonster "Jaguar Warrior";
 		choose row MonsterID from the Table of Random Critters;
-		if "Male Preferred" is not listed in feats of Player:
+		if Player is not MalePreferred:
 			now sex entry is "Female";
 
 Table of Game Objects (continued)

@@ -625,7 +625,7 @@ to say wyvfem_2: [Oral Giving Cunt]
 	say "     Taking a moment to catch your breath and clean yourself of the substantial mess she's made, you set off and leave the exhausted and spent monster, satisfied with your work... Albeit a bit aroused yourself from all of it.";
 	increase Libido of Player by 3;
 	if PlayerCunnilunguses > 0:
-		CreatureSexAftermath "Wyvern" receives "OralPussy" from "Player"; [SexAftermath NYI: Player gives the wyvern a cuntjob aka cunnilingus]
+		CreatureSexAftermath "Player" receives "OralPussy" from "Wyvern"; [SexAftermath NYI: Player gives the wyvern a cuntjob aka cunnilingus]
 
 Table of CombatPrep (continued)
 name(text)	PrepFunction(text)
@@ -683,11 +683,11 @@ to say PrepCombat_Wyvern:
 				malepronouns;
 		psycheeval;
 		libidoeval;
-		if "Female Preferred" is listed in feats of Player:
+		if Player is FemalePreferred:
 			now sex entry is "Female";
 		else if "Herm Preferred" is listed in feats of Player:
 			now sex entry is "Both";
-		else if "Male Preferred" is listed in feats of Player:
+		else if Player is MalePreferred:
 			now sex entry is "Male";
 		else if WYVGEN is 1:
 			now sex entry is "Male";
@@ -789,7 +789,7 @@ When Play begins:
 	now loot entry is "wyvern goop"; [ Loot monster drops, usually infective with the monster's _own_ strain (for example if there is a Cross-Infection from sex)]
 	now lootchance entry is 60; [ Chance of loot dropping 0-100 ]
 	now MilkItem entry is "wyvern milk"; [ Item to be given to the player if they have this infection and milk themselves. ]
-	now CumItem entry is ""; [ Item to be given to the player if they have this infection and jerk off. ]
+	now CumItem entry is "wyvern cum"; [ Item to be given to the player if they have this infection and jerk off. ]
 	now TrophyFunction entry is "-"; [ Function to generate a list of optional loot items, of which the player can choose one after victory. ]
 	now scale entry is 5; [ Number 1-5, approx size/height of infected PC body: 1=tiny, 3=avg, 5=huge ]
 	now body descriptor entry is "[one of]bulky[or]draconic[or]winged[at random]";
@@ -1653,7 +1653,7 @@ to WyvernSexAftermath (SexChoice - a number): [currently only used for Wyvern Or
 		-- 2: [Wyvern receives a blowjob from the player]
 			CreatureSexAftermath "Player" receives "OralCock" from "Wyvern";
 		-- 3: [Wyvern receives a cuntjob aka cunnilingus from the player]
-			CreatureSexAftermath "Player" receives "OralPussy" from "Wyvern";;
+			CreatureSexAftermath "Player" receives "OralPussy" from "Wyvern";
 		[-- 4: [Wyvern grinding against player's torso] ]
 		-- 5: [Wyvern pussyfucks the player -> leads to fovichance]
 			CreatureSexAftermath "Player" receives "PussyFuck" from "Wyvern";
