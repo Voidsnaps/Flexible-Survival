@@ -51,11 +51,12 @@ Sterile of GivingFirbolg is true. [steriles can't knock people up]
 MainInfection of GivingFirbolg is "".
 Description of GivingFirbolg is "[Givingdesc]".
 
+the scent of the GivingFirbolg is "     Giving smells like he's almost drenched in what you could describe as some sort of Irish soap. Very much herbal and sea-salty in all the right ways. It might be from all the sweat caked on his body."
+
 to say Givingdesc:
 	if debugactive is 1:
 		say "     DEBUG -> HP: [HP of GivingFirbolg] <- DEBUG[line break]";
 	say "     What stands in front of you is a hyper masculine giant-kin that easily towers over you around 10 feet, wearing nothing but a baseball cap and a stretched out plastic fishing jumpsuit with dirty boots that have seen brighter days. Their figure barely contained in the plastic as the straps on his shoulders on to dear life to keep his massive man-pecs from jiggling all over the place, along with thick thighs that bulge at their plastic cage. His rugged freckled face looks upon you, seeing your curiosity and flicking his tied up messy hair. He gives a small snort with his cow nose as he gives you an innocent smile.";
-
 
 Instead of conversing the GivingFirbolg:
 	if HP of GivingFirbolg is 1:
@@ -63,7 +64,7 @@ Instead of conversing the GivingFirbolg:
 
 to say GivingFirbolgTalkMenu:
 	say "[line break]";
-	say "'Im a open book, what do you need?' Giving seems to be in a good mood for talking.";
+	say "     'I'm a open book, what do you need?' Giving seems to be in a good mood for talking.";
 	now sextablerun is 0;
 	blank out the whole of table of fucking options;
 	[]
@@ -83,6 +84,11 @@ to say GivingFirbolgTalkMenu:
 		now sortorder entry is 3;
 		now description entry is "Why does he still seem pretty apprehensive?";
 	[]
+	if HP of GivingFirbolg is 2:
+		choose a blank row in table of fucking options;
+		now title entry is "What were the sea scouts like?";
+		now sortorder entry is 4;
+		now description entry is "Giving was a sea scout leader, what could it have been like?`";
 	sort the table of fucking options in sortorder order;
 	repeat with y running from 1 to number of filled rows in table of fucking options:
 		choose row y from the table of fucking options;
@@ -104,6 +110,8 @@ to say GivingFirbolgTalkMenu:
 					say "[GivingTalk2]";
 				if (nam is "About Knott"):
 					say "[GivingTalk3]";
+				if (nam is "What were the sea scouts like?"):
+					say "[GivingTalk4]";
 				wait for any key;
 		else if calcnumber is 0:
 			now sextablerun is 1;
@@ -116,14 +124,15 @@ to say GivingFirbolgTalkMenu:
 to say GivingTalk1:
 	say "     'Well, as you know, I'm Giving, had a former name but everyone just sorta called me Cappy, A Skipper for a Sea Scout Group near the port. Lotta Family members who were into sea related jobs so it kinda was a given, Apocalypse happened, I single handedly got my troop to a checkpoint to get them to safety, but I couldn't in good conscience leave survivors alone in this place, somehow didn't end up infected for a long time.' The Firbolg flexes his bicep eagerly to show off the gun show, the scars that surround its edges showing a history of rough rides and close calls with not-too-kind strangers. 'Was just near some river in the forest trying to filter the water to drink when I saw this little guy-- which I now know are called Baegs- just all alone, honestly when he confided in me about how much the others were struggling to get by, I felt this... urge you know.'";
 	WaitLineBreak;
-	say "     You don't know what he means. 'So I asked him to fuck me, call it an impulse, but its hard to explain, when I turned into this I knew I made the right choice.' There is a slight pause as Giving sighs out 'It was... really just his sweet voice and hearing their backstory that made me cave into this infection. Alongside the possibility I could become a father, although 'Daddy' is all our Fathers technically, it dosen't mean I can't take care of the more less experienced Firbolgs when their just getting over their lusts.'";
+	say "     You don't know what he means. 'So I asked him to fuck me, call it an impulse, but its hard to explain, when I turned into this I knew I made the right choice.' There is a slight pause as Giving sighs out 'It was... really just his sweet voice and hearing their backstory that made me cave into this infection. Alongside the possibility I could become a father, although 'Daddy' is all our Fathers technically, it doesn't mean I can't take care of the more less experienced Firbolgs when their just getting over their lusts.'";
+	now HP of GivingFirbolg is 2;
 
 to say GivingTalk2:
 	if a random number between 1 and 5 is:
 		-- 1: [Short Story 1]
 			say "     'Part of me feels bad for the military, you know? When you make a lot of trips around the city, you get to notice the same faces slowly giving into insanity and eventually joining the deviants. I try to help but again, kinda hard to say you mean no harm when you're built like a sexual tank. Most recent one I could remember for them was how I was out on the town to do some acts of Cin for Sangre..-- That means basically just gift getting but more meaningful- anyways I was just in some pop up store next door when I realized the sexual moans and screams were actually right next door, I went to see that some troop was just trying to fight off what looked to be some sex horde - two of their guys already getting their cheeks taken as the rest of them were pinned between some car debris and the horny crowd. I had to drop everything to basically hurl some broken cars to buy them some time, fuckers were about to attack me until they saw me ripping the hyenas and cat-people off their guys. They still ran away, I think they were shaken up badly though, part of me wonders if any of them are alright, last I saw I think one of them joined the 'other' ranks.'";
 		-- 2: [Short Story 2]
-			say "     'If you see any green men steer clear of them, I hate how my city scavenging has to always be interrupted when I come across some strays of them plowing some poor people just right out on the streets. A guy can't just grab some toilet paper for the commune without suddenly hearing someone gagging followed by seeing some snow leopard getting spitroasted by some big fellas. The Worst part is that they really don't care if i'm twice their size, all I wanna do is just step into a room and just intimidate them, but all they see is [']A big breeder with a fat ass['], that two versus one was NOT in their favor. Oh right, the snow leopard guy I think was like half-orc by then, to be honest when you're helping ferals you gotta just keep distance, he looked ready to find his next fuck.'";
+			say "     'If you see any green men steer clear of them, I hate how my city scavenging has to always be interrupted when I come across some strays of them plowing some poor people just right out on the streets. A guy can't just grab some toilet paper for the commune without suddenly hearing someone gagging followed by seeing some snow leopard getting spit-roasted by some big fellas. The Worst part is that they really don't care if I'm twice their size, all I wanna do is just step into a room and just intimidate them, but all they see is [']A big breeder with a fat ass['], that two versus one was NOT in their favor. Oh right, the snow leopard guy I think was like half-orc by then, to be honest when you're helping ferals you gotta just keep distance, he looked ready to find his next fuck.'";
 		-- 3: [Short Story 3]
 			say "     'I think on a wholesome note, one of my adventures actually was helping a human get to the commune. A guy was stuck high in a tree and was offering me stuff but I just told him I didn't need anything to save him. He thanked me profusely for giving him some food and water, guided him here and he's been the happiest face around the snowy forest.";
 		-- 4: [Short Story 4]
@@ -131,9 +140,14 @@ to say GivingTalk2:
 		-- 5: [Short Story 5]
 			say "     Let's see... the commune wanted me to get some sewing kits, since I'm the one who's mostly out and about, I usually know where to get some things. Heading off to the High Rises, I was about to check out one shop I've seen when I passed by only to see a bunch of foot soldiers scramble out of there. Luckily apparently at least some of the troops know that some blue skinned figure sometimes helps them out because they could have pumped me with lead, apparently the fire exit was a no-go and they were just trapped, only thing I asked them for is just confirmation if there's any sewing supplies left inside-- which luckily was a yes.";
 
-to say  GivingTalk3:
-	say "     'Oh Knott? Hes a good guy but well, hes kinda still dealing with the infection impulses as well as the fact that he is scared to show himself to the survivor group he was apart of' Giving scratches the back of his head 'Oh tell you what, im in trouble due to transforming him without asking Daddy, so maybe you could grab his old things and bring it to him?' You ask him what could he gather, 'Oh im not sure, you gotta ask him yourself, I didnt want to pry so I know the bare minimum.'";
-
+to say GivingTalk3:
+	say "     'Oh Knott? He's a good guy but well, he's kinda still dealing with the infection impulses as well as the fact that he is scared to show himself to the survivor group he was apart of,' Giving scratches the back of his head 'Oh tell you what, I'm in trouble due to transforming him without asking Daddy, so maybe you could grab his old things and bring it to him?' You ask him what could he gather, 'Oh I'm not sure, you gotta ask him yourself, I didn't want to pry so I know the bare minimum.'";
+to say GivingTalk4:
+	say "     So what was the sea scouts like? 'Hmm, well I guess it was mostly interesting helping a lot of kiddos get jobs and such, most of them are the type of new legs who are worried about how scary the sea might be, but being alone with a guy like me calms them down well enough,' Giving says, scratching the back of his head. 'I would never let anything happen to them, it doesn't matter what happens, I make sure everyone in my crew gets home. But, I'm saying this like it's the southern sea, in reality at best it's just showing scuba, C.P.R, how boats work, just what you would imagine sea scouts would do. I would love to set out on the water again, but a lot of people here rather stay cooped up in the community camp, which granted, it's safer than all that's happening right now, but I've fought a few infected myself, they're not to hard if you know what your doing...well the truly feral ones anyway.'  You ask him what he wants to do afterwards when all fo this was over, which he takes a moment to ponder, squishing his pecs between his biceps, 'Well... I reckon I'll try to get my job back, or become a sea time mariner. I doubt I'll be able to work around kids looking like this so at best just find something in heavy labor. These muscles feel the best when they're flexin['] anyway!'";
+	WaitLineBreak;
+	say "     Giving smirks, briefly striking a quick classical bodybuilder's pose while their waders groan in protest of his colossal bulk. Nodding along, you ask him if he worries the nanite's influence might overwhelm him one day. After all Giving told you he was more than happy to become a Firbolg by choice. 'Well I can't say I regret it a lot, to be honest hearin people fucking like animals day in and day out for a apocalypse was far from how I imagined I spend my time.' He blushes, covering his snout as their deep cyan hide flashes a smoldering purple, 'Still between the constant feral 'attacks' and contaminated food, part of me also was... curious... just their bulges. It looked painful, but once he slipped in it was-' Giving pauses, clenches his teeth so tight his lips turn a pale bony white, before waving you off, muttering about needing to take care of something. You ask him what that thing might be, 'W-well, there's no other way to describe it than utter bliss, he put the tip inside of my mouth and let me suck it to my own desire, next thing I knew I was taking him down to the base as my whole body just grew. The next moment he's just makin['] me squirt till I'm cross-eyed.' His moans with a blissful far off stare, 'I'm not encouraging anyone to just give in... but hooo weee.... I was a sweating mess. I think Father had to stop us as we kept getting stuck in... uh oh...'";
+	WaitLineBreak;
+	say "     Giving pants, fanning his face as tainted sweat down his beefy chest traces the chiseled curves of statuesque abs like shimmering motes of aquamarine. Following their trail, your eyes slowly drift to fetching hybrid's plush cunt as they thoughtlessly lean into your stare, stammering. 'Mmm... I think I gotta go for a sec, but I'll be back!' as he runs off into the camp, with his tail wagging behind him like a needy husky bitch. Shrugging, you have a feeling he's going to be paying Sangre a visit.";
 
 Section 2 - Sex
 
@@ -150,11 +164,11 @@ to say GivingSexMenu:
 	now sextablerun is 0;
 	blank out the whole of table of fucking options;
 	[]
-	if Player is Male:
+	if Player is Male: [Minor note: sometimes herms can see male scenes, if you want to change the to: if Cock count of Player >= 1 and Cunt Count of Player is 0 that should fix the issue if it pops up.]
 		choose a blank row in table of fucking options;
 		now title entry is "Firbolg Breeding";
 		now sortorder entry is 1;
-		now description entry is "Firbolg Breeding Description";
+		now description entry is "Firbolg Breeding Description"; [<= might wanna tweak this]
 	[]
 	sort the table of fucking options in sortorder order;
 	repeat with y running from 1 to number of filled rows in table of fucking options:
@@ -189,15 +203,13 @@ to say GivingSex1: [Firbolg Breeding] [Requires Cock, need something to stop pla
 	say "     With mouth-sharing breaths, the passionate fuck starts, the heavy smell of brown sugar emanates, the Firbolg sweating a storm just with a few strokes. His tongue is limp in your mouth as all thoughts beyond pleasing his needy pussy vanish, pulling away from his tongue nets you a look at his stuffed pecs rocking with your heavy thrusts, pushing your aroused cock to grow even harder deep within his hole. To his credit, your partner tries his best to keep his moans and whimpers quiet, but rotating your hips in any direction makes him scream silently. You think that was the point when you couldn't care less for the infection as your [bodydesc of Player] explore his bubbly muscles, watching each shake and jiggle like jelly in ecstasy.";
 	say "     'F-fuck, o-oh fuck... fuuuuuuck' your groin is covered in Giving's love, he hasn't stopped orgasming since you first pushed in, no wonder these brutes are strong, if they were weak they would have been getting bred everyday by anyone from the city who knows they're just big guys with needy pussies. 'Please don't stop... Your Big Bro is so haard.. Let me take care of your fat cock~' He sighs lustfully, wrapping his arms around you as he nestles your head near his nipple. Some of the sweat around it gets in your mouth, making you climax immediately deep within his empty womb.";
 	WaitLineBreak;
-	say "     But... your balls aren't empty. Licking around the areola makes you far too energized to think about anything but how good Giving's heat tugs you in. The sweet firbolg begins matching your thrusts- pushing foward to let your cock paint every angle of his insides white. 'Oooooh you're a big [if Player is Male]guy [else if Player is Female]gal [else]one [end if]aren't you~?' You nod in approval, 'Yeah... yeah your definitely... Big... I won't tell if you won't... our little secret~...' Your second climax comes as a shock, your own moans muffled when he smooshes you to his pec again, 'Shhhh... can't let them know you're digging my guts out to stuff me with little ones' all his goading makes you fully ready to bloat him good.";
-	say "     Everytime you feel yourself get close, you latch onto the source of his creamy milk, sucking on the engorged pec to muffle your jittering. Giving sometimes looks down at you, grinning ear to ear before you knock him back into another intense climax that makes his entire body shiver. You lost count at some point, forgetting completely what your mission is. This situation makes you think about how after this, Giving is gonna have to walk around and explain who did this, maybe the other Firbolgs do the same to some ferals they like? A bunch of muscular behemoths who jam themselves onto the cock of anything with a pulse, making him swell with such taboo pretenses finally snaps you out enough to look at your handiwork.";
+	say "     But... your balls aren't empty. Licking around the areola makes you far too energized to think about anything but how good Giving's heat tugs you in. The sweet firbolg begins matching your thrusts- pushing forward to let your cock paint every angle of his insides white. 'Oooooh you're a big [if Player is Male]guy [else if Player is Female]gal [else]one [end if]aren't you~?' You nod in approval, 'Yeah... yeah your definitely... Big... I won't tell if you won't... our little secret~...' Your second climax comes as a shock, your own moans muffled when he smooshes you to his pec again, 'Shhhh... can't let them know you're digging my guts out to stuff me with little ones' all his goading makes you fully ready to bloat him good.";
+	say "     Every time you feel yourself get close, you latch onto the source of his creamy milk, sucking on the engorged pec to muffle your jittering. Giving sometimes looks down at you, grinning ear to ear before you knock him back into another intense climax that makes his entire body shiver. You lost count at some point, forgetting completely what your mission is. This situation makes you think about how after this, Giving is gonna have to walk around and explain who did this, maybe the other Firbolgs do the same to some ferals they like? A bunch of muscular behemoths who jam themselves onto the cock of anything with a pulse, making him swell with such taboo pretenses finally snaps you out enough to look at your handiwork.";
 	WaitLineBreak;
 	say "     His entire belly was distended with cum, your legs and the cold snow between you covered in slime. He tries to mumble a few words, but only manages to mouth them for a while. 'Such a naughty little one~... Big Brother's gonna have to seek you out for a womb filling, all this cum of yours feels sooooooo dang good.";
 	say "     You lay into his warm body, arms wrapped again around him as both of you catch your breath. With a heavy heart, you eventually leave his embrace. Knowing for sure that his womb will catch and make you new sires.";
 	NPCSexAftermath GivingFirbolg receives "PussyFuck" from Player;
 
-
 Section 3 - Events
-
 
 Giving ends here.

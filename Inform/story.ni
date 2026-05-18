@@ -7,23 +7,23 @@ Use memory economy.
 Use slow route-finding.
 [ The following adjust Informs compiler settings so that it allocates enough space. If these values are incorrect, inform will fail to compile.]
 [ To determine if one of these is your issue, use the Errors tab in the inform 7 window. ]
-Use MAX_INDIV_PROP_TABLE_SIZE of 500000.
-Use MAX_PROP_TABLE_SIZE of 8000000.
-use MAX_STATIC_DATA of 12500000.
-Use MAX_OBJ_PROP_COUNT of 1700.
-use MAX_SYMBOLS of 13000000. ["Compiler finished with code 10"]
+use MAX_INDIV_PROP_TABLE_SIZE of 20000.
+use MAX_PROP_TABLE_SIZE of 4000000.
+use MAX_STATIC_DATA of 5000000.
+use MAX_OBJ_PROP_COUNT of 500.
+use MAX_SYMBOLS of 500000. ["Compiler finished with code 10"]
 use MAX_NUM_STATIC_STRINGS of 500000. [ Code 10 ]
-use SYMBOLS_CHUNK_SIZE of 250000. [ Code 10 ]
-use ALLOC_CHUNK_SIZE of 1450000.
-use MAX_OBJECTS of 50000.
-use MAX_ACTIONS of 30000.
-use MAX_VERBS of 30000.
-use MAX_VERBSPACE of 50000.
-use MAX_ARRAYS of 1000000.
-Use MAX_ZCODE_SIZE of 10000000.
-Use MAX_DICT_ENTRIES OF 60000.
-Use maximum text length of at least 4000.
-Use Scoring.
+use SYMBOLS_CHUNK_SIZE of 100000. [ Code 10 ]
+use ALLOC_CHUNK_SIZE of 800000.
+use MAX_OBJECTS of 5000.
+use MAX_ACTIONS of 500.
+use MAX_VERBS of 500.
+use MAX_VERBSPACE of 8000.
+use MAX_ARRAYS of 100000.
+[use MAX_ZCODE_SIZE of 10000000.]
+use MAX_DICT_ENTRIES OF 5000.
+[use maximum text length of at least 4000.]
+use Scoring.
 [ End compiler settings. ]
 
 [To decide which number is the absolute value of (N - a number):
@@ -80,8 +80,8 @@ Include (-
 [ YES_OR_NO_QUESTION_INTERNAL_R; ];
 -) instead of "Yes/No Questions" in "Parser.i6t".
 
-The yes or no message is a text that varies.[@Tag:NotSaved]
-The yes or no message is "[link]yes[end link] or [link]no[end link]> [run paragraph on]".
+[The yes or no message is a text that varies.[@Tag:NotSaved]]
+The yes or no message is always "[link]yes[end link] or [link]no[end link]> [run paragraph on]".
 
 playerinput is a snippet that varies.[@Tag:NotSaved]
 
@@ -98,7 +98,8 @@ To select an option from (curtable - a table name):
 			follow the toggle entry;
 			break;
 		else:
-			say "Invalid Selection.";
+			say "Invalid Selection. Pick between 1 and [the number of filled rows in curtable].";
+	say "[line break]";
 
 To get typed command as (S - a snippet): (-
 	KeyboardPrimitive(buffer, parse);
@@ -162,8 +163,7 @@ Include Fighting by Core Mechanics.
 Include Fucking by Core Mechanics.
 Include Game Endings by Core Mechanics.
 Include Gender Pronouns by Core Mechanics.
-Include giving in by Core Mechanics.
-Include Inventory by Core Mechanics.
+Include Giving in by Core Mechanics.
 Include Masturbate by Core Mechanics.
 Include Microwave by Core Mechanics.
 Include Microwaveable Objects by Core Mechanics.
@@ -189,16 +189,13 @@ Include Text Capture by Eric Eve.
 Include Vending Machine by Core Mechanics.
 Include Weapons by Core Mechanics.
 Include Zephyr Phone by Core Mechanics.
-
 Include Milk Items by Core Mechanics.
 Include Cum Items by Core Mechanics.
-
 
 Book 3 - Loading the Main Game Content
 
 Part 1 - Locations
 
-A room can be restable. A room is usually not restable.
 Include Apocalypse Store by Omen.
 Include Approaching the Capitol Building by Guest Writers.
 Include Astor by Rikaeus.
@@ -220,6 +217,8 @@ Include Camp Of The Snake by Gherod.
 Include Tenvale College Campus by Rikaeus.
 Include Dog House by Kaleem mcintyre.
 Include Down Under Pub by Stripes.
+Include Dragon Temple Map by Sundered Dragon.
+Include Encampment Tree by OrangeHorned.
 Include Equinoid Camp by Song.
 Include Farm by Wahn.
 Include Ghost Fair by JP.
@@ -307,7 +306,6 @@ Include Exploration Events by Kurainyx.
 Include Extra Added Scenes by Kaleem mcintyre.
 Include Extra College Events by Speedlover.
 Include Fair Events by Sarokcat.
-Include Fair Events by Sarokcat.
 Include Female Dorm Events by Prometheus.
 Include Feral Events by Guest Writers.
 Include Fire House by Kaleem Mcintyre.
@@ -325,6 +323,7 @@ Include High Rise Events by Stripes.
 Include High Rise Events by Wahn.
 Include Horus by Rikaeus.
 Include How High by Kaleem mcintyre.
+Include Husky BadEnd by Gherod.
 Include Hyena Bikers by Stripes.
 Include Hyena Shoppers by Guest Writers.
 Include Hyena Situations by Hellerhound.
@@ -496,7 +495,6 @@ Include Elf by Nuku Valente.
 Include Elk by Stripes.
 Include Elven Hunter by Wahn.
 Include Enhanced Chimera by Stripes.
-Include Erica by Wahn.
 Include Ewe by Luneth.
 Include Fathnach Infection by OrangeHorned.
 Include Feline Gymnast by Guest Writers.
@@ -577,6 +575,7 @@ Include Impala by UrsaOmega.
 Include Incubus by Stripes.
 Include Inflatable Snake by Kernog.
 Include Inflatable Vulpine by Stripes.
+Include Ipotane by Sundered Dragon.
 Include Jackal Alpha by Gherod.
 Include Jackal Femboy by Gherod.
 Include Jackal Guard by Xenophiliac.
@@ -636,6 +635,7 @@ Include Nerdy Mouse by Wahn.
 Include Nightmare by Sarokcat.
 Include Ocelot by Stripes.
 Include Ogres by Lyall.
+Include Onna Uma by Sundered Dragon.
 Include Opossum Sailor by StripeGuy.
 Include Orc Infections by Wahn.
 Include otter by Nuku Valente.
@@ -755,11 +755,9 @@ Include Zebra by Luneth.
 
 Part 4 - NPCs
 
-
 Include Absinthe by Bigfish15079.
 Include Ace by Aureas Gigas.
 Include Adam by Wahn.
-Include Addicted Breeder by Voidsnaps.
 Include Aeca by Wahn.
 Include Aerana by Gherod.
 Include Alex by Stripes.
@@ -782,6 +780,7 @@ Include Anthony by Wahn.
 Include Anton by Wahn.
 Include Araqiel by Gherod.
 Include Ares by Wahn.
+Include Arlene by Sundered Dragon.
 Include Ariel by Emerald.
 Include Arthur by Luneth.
 Include Anastasia by Stripes.
@@ -793,6 +792,7 @@ Include Azari by Dys.
 Include Baron by Voidsnaps.
 Include Bastet by Wahn.
 Include Bernard by Prometheus.
+Include Best Pony by Sundered Dragon.
 Include Bianca by Prometheus.
 Include Bjorn by Rikaeus.
 Include Blake by Wahn.
@@ -844,6 +844,7 @@ Include Diego by Wahn.
 Include Doctor Mouse by Voidsnaps.
 Include Dominick by Stripes.
 Include Doran by Blue Bishop.
+Include Dragon Cultist by Sundered Dragon.
 Include Drelgoth by Gherod.
 Include DrMoffatt by Stripes.
 Include DrUtah by Stripes.
@@ -999,6 +1000,7 @@ Include RexxyEvent by Prometheus.
 Include Rhidall by Voidsnaps.
 Include Richard by Wahn.
 Include Riker by Voidsnaps.
+Include Robin by Wahn.
 Include RodAndRonda by Wahn.
 Include Roman by Kernog.
 Include Ryan by Fuxi.
@@ -1066,16 +1068,6 @@ Include Zigor by Stripes.
 Include Ziix by Voidsnaps.
 Include Zoe by Kernog.
 
-[Inactivated until further developments]
-[
-Include Beag Infection by OrangeHorned.
-Include Fathnach Infection by OrangeHorned.
-Include Giving Firbolg by OrangeHorned.
-Include Knott by OrangeHorned.
-Include Firbolg Quests by OrangeHorned.
-Include Firbolg Tapes by OrangeHorned.
-]
-
 Part 5 - Companions and Allies
 
 Include Artemis by Stripes.
@@ -1090,14 +1082,16 @@ Include Korvin by Wahn.
 Include Rachel Mouse by Stripes.
 Include Ryousei by Wahn.
 
+Book 4 - Starting the Game
+
 [Game start autofires]
 
 When play begins:
 	adjustdefaulthelp; [adjusts help menu]
 	let tempname be indexed text;
 	repeat with q running from 1 to the number of rows in the table of game objects:
-		add name in row Q of table of game objects to allobjs;
 		choose row q in the table of game objects;
+		add Name entry to allobjs;
 		now tempname is Name entry in lower case;
 		now sortName entry is tempname;
 	sort the table of game objects in sortname order;
@@ -1110,19 +1104,16 @@ When play begins:
 		now hypernull is 1;
 	repeat with x running through featsets:
 		now x is a part of Player; [TODO: Investigate if this is actually needed]
-	if ScenarioChosen is 1: [sets name of scenario for menu based on preset]
-		now scenario is "Bunker";
-	else if ScenarioChosen is 2:
-		now scenario is "Caught Outside";
-	else if ScenarioChosen is 3:
-		now scenario is "Rescuer Stranded";
-	else if ScenarioChosen is 4:
-		now scenario is "Forgotten";
-	else if ScenarioChosen is 5:
-		now scenario is "Researcher";
-	else:
-		now ScenarioChosen is 1;
-		now scenario is "Bunker";
+	if ScenarioChosen is: [sets name of scenario for menu based on preset]
+		-- 1: now scenario is "Bunker";
+		-- 2: now scenario is "Caught Outside";
+		-- 3: now scenario is "Rescuer Stranded";
+		-- 4: now scenario is "Forgotten";
+		-- 5: now scenario is "Researcher";
+		-- 6: now scenario is "Running with Wolves";
+		-- otherwise:
+			now scenario is "Bunker";
+			now ScenarioChosen is 1;
 	if AnalLevel < 1 or AnalLevel > 3, now AnalLevel is 2;
 	if WSLevel < 1 or WSLevel > 3, now WSLevel is 2;
 	if OvipregLevel is not 1, now OvipregLevel is 2;
@@ -1136,14 +1127,10 @@ When play begins (this is the graphics window construction rule):
 	if NewGraphics is true: [Build window regardless in case player decides to turn it on later]
 		now the graphics window proportion is NewGraphicsRatio;
 		if NewGraphicsPosition is:
-			-- 0:
-				now graphics window position is g-right;
-			-- 1:
-				now graphics window position is g-left;
-			-- 2:
-				now graphics window position is g-above;
-			-- 3:
-				now graphics window position is g-below;
+			-- 0: now graphics window position is g-right;
+			-- 1: now graphics window position is g-left;
+			-- 2: now graphics window position is g-above;
+			-- 3: now graphics window position is g-below;
 		reconstruct graphics window;
 		[now the graphics window pixel count is 1;]
 		follow the ngraphics_blank rule;

@@ -6,17 +6,15 @@ Table of Basic Help Options (continued)
 title	description
 "Giving In"	"Want to give in to the changes? Type [bold type]givein[roman type] and your character will surrender to the nanites. Make sure there is no space. Type it again to attempt to regain control."
 
+givingupton is a number that varies.
+
 givingup is an action applying to nothing.
 understand "givein" as givingup.
-understand "givein to nanites" as givingup.
-understand "givein to changes" as givingup.
+understand "givein to nanites/changes" as givingup.
 
 check givingup:
 	if Humanity of Player > 99:
-		say "To what? There is nothing to take control if you do.";
-		stop the action;
-
-givingupton is a number that varies.
+		say "To what? There is nothing to take control if you do." instead;
 
 carry out givingup:
 	if givingupton is 0:
@@ -26,16 +24,17 @@ carry out givingup:
 	else:
 		say "Do you want to take control of your desires again, or not?";
 		if Player consents:
+			LineBreak;
 			say "You pull your mind back together.";
 			now givingupton is 0;
 			now quitter is 0;
 		else:
-			now givingupton is 1;
+			LineBreak;
 
 an everyturn rule:
 	if givingupton is 1:
 		SanLoss 20;
-		say "The nanites work inside your partially willing brain, making you more feral. ([humanity of Player]/100)";
+		say "The nanites work inside your partially willing brain, making you more feral. ([humanity of Player]/100)[line break]";
 		decrease score by 200;
 		if humanity of Player < 0:
 			now givingupton is 0;

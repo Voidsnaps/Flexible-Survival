@@ -2,14 +2,13 @@ Version 2 of Fighting by Core Mechanics begins here.
 [- Originally Authored By: Nuku Valente -]
 [Version 2 - Transplant and partial rewrite from story.ni - Wahn]
 
-BeforeCombat is a number that varies.
+BeforeCombat is a number that varies.[@Tag:NotSaved]
 
 To fight:
 	let PossibleEncounters be a list of text;
 	if debugactive is 1:
 		say "     DEBUG: Random Monster Choosing Started[line break]";
 	now MonsterID is a random number from 1 to number of filled rows in the Table of Random Critters;
-	let Q be a list of numbers;
 	if "Unerring Hunter" is not listed in feats of Player: [only adds random monsters if the player isn't an unerring hunter]
 		if ( BodyName of Player is "Mental Mouse" or mousecurse is 1 ) and mouse girl is not listed in companionList of Player:	[hunted by the mouse collective]
 			if there is a name of "Mental Mouse" in the Table of Random Critters:
@@ -18,7 +17,8 @@ To fight:
 					repeat with x running from 1 to ( ( 100 - humanity of Player ) / 25 ):
 						add "Mental Mouse" to PossibleEncounters;
 		if insectlarva is true and larvaegg is 1 and gestation of Child is 0: [hunted by wasp hive anywhere outdoors]
-			if battleground is not "Mall" and battleground is not "Stable" and battleground is not "Hospital" and battleground is not "Museum" and battleground is not "Sealed":
+			let nofly be {"Mall", "Stable", "Hospital", "Museum", "Sealed", "Warehouse", "Smith Haven", "Atlantis"};
+			if battleground is not listed in nofly:
 				if there is a name of "Black Wasp" in the Table of Random Critters:
 					add "Black Wasp" to PossibleEncounters;
 					if Libido of Player > 30:
@@ -27,46 +27,45 @@ To fight:
 					if larvacounter > 3:
 						repeat with x running from 1 to ( larvacounter / 3 ):
 							add "Black Wasp" to PossibleEncounters;
-	repeat with X running from 1 to number of filled rows in Table of Random Critters:
-		choose row X from the Table of Random Critters;
-		if BannedStatus entry is true: [banned creatures can't be fought]
+	repeat through Table of Random Critters:
+		if BannedStatus entry is true and inasituation is false: [banned creatures can't be fought]
 			if debugactive is 1:
 				say "DEBUG -> Can't fight with creature [Name entry] because it has Banned: [BannedStatus entry][line break]";
 			next;
-		if there is a lev entry:
-			if lev entry > level of Player + 1 and HardMode is false:
-				next;
-		else:
-			next;
-		if there is no area entry, next;
-		if area entry matches the text battleground:
+		if there is no lev entry or (lev entry > level of Player + 1 and HardMode is false), next;
+		if there is a area entry and area entry exactly matches the text battleground, case insensitively:
 			if (DayCycle entry is 2 and daytimer is day) or (DayCycle entry is 1 and daytimer is night), next; [skips if day/night doesn't match]
-			let skipit be 0;
+			let skipit be false;
 			repeat with s running through warded flags:
 				if Name entry is listed in infections of s:
-					now skipit is 1;
+					now skipit is true;
 					break;
-			if skipit is 1, next;
+			if skipit is true, next;
 			add Name entry to PossibleEncounters;
+			if Name entry is "Reindeer" and DateMonth is 12 and DateDay < 26:
+				repeat with x running from 1 to ( DateDay / 7 ):
+					add Name entry to PossibleEncounters;
+				if DateDay is 25, add Name entry to PossibleEncounters;
 			if "Like Attracts Like" is listed in the feats of Player:
 				if BodyName of Player is Name entry, add Name entry to PossibleEncounters;
 				if FaceName of Player is Name entry, add Name entry to PossibleEncounters;
 				if SkinName of Player is Name entry, add Name entry to PossibleEncounters;
 				if TailName of Player is Name entry, add Name entry to PossibleEncounters;
 				if CockName of Player is Name entry, add Name entry to PossibleEncounters;
-	if the number of entries in PossibleEncounters is 0 and debugactive is 1:
-		say "     DEBUG: No Possible Monsters Found![line break]";
-	if the number of entries in PossibleEncounters is not 0:
+	if PossibleEncounters is not empty:
 		sort PossibleEncounters in random order;
 		let RandomChosenMonster be entry 1 in PossibleEncounters;
-		choose a row with name of RandomChosenMonster in the Table of Random Critters;
 		setmonster RandomChosenMonster;
+		choose row MonsterID from Table of Random Critters;
 		prepforfight;
 		if "Experienced Scout" is listed in feats of Player and a random chance of 2 in 10 succeeds and combat abort is not 1 and inasituation is false:
 			say "You notice an avenue of escape! Do you want to abort the combat?";
 			if Player consents:
+				LineBreak;
 				now combat abort is 1;
-				say "You slip away before [Name entry] can begin their assault.";
+				say "You slip away before [if enemy type entry is not 2]the [end if][EnemyNameOrTitle] can begin their assault.";
+			else:
+				LineBreak;
 		if combat abort is 1:
 			now combat abort is 0;
 			rule succeeds;
@@ -81,9 +80,11 @@ To fight:
 				say "The creature gets the drop on you!";
 				follow the monster combat mode rule; [select the combat mode for first-strike]
 				choose row monstercom from table of Critter Combat;
-				if there is a continuous in row monstercom of the table of Critter Combat:
+				now BeforeCombat is 1;
+				if there is a continuous entry:
 					follow the continuous entry;
 				follow the combat entry;
+				now BeforeCombat is 0;
 				if HP of Player < 1 or lost is 1, stop the action;
 		choose row MonsterID from Table of Random Critters;
 		if weapon object of Player is ranged:
@@ -108,13 +109,13 @@ To fight:
 		if companionList of Player is not empty:
 			repeat with x running through companionList of Player:
 				if x is not NullPet:
-					now needed is ( level of x ) times 10;
+					now needed is level of x times 10;
 					if "Good Teacher" is listed in feats of Player:
-						now needed is ( level of x ) times 6;
+						now needed is level of x times 6;
 					if XP of x >= needed and level of x < level of Player and humanity of Player > 0:
 						pet level up x;
 	else:
-		say "     Note: No possible creature to be encountered could be found. This might be caused by having various things banned, taking the creatures out of the game, or being low level in a higher level area. Dangerous enemies are excluded to avoid low level players being stomped flat, unless hard mode is enabled.";
+		say "     Note: No possible creature to be encountered could be found. This might be caused by having various things banned, taking the creatures out of the game or being low level in a higher level area. Dangerous enemies are excluded to avoid low level players being stomped flat, unless hard mode is enabled.";
 	if debugactive is 1:
 		say "     DEBUG: Random Monster Choosing Ended[line break]";
 	rule succeeds;
@@ -122,7 +123,7 @@ To fight:
 To challenge:
 	choose row MonsterID from the Table of Random Critters;
 	prepforfight;
-	if BannedStatus entry is true:
+	if BannedStatus entry is true and inasituation is false:
 		now combat abort is 1;
 		if debugactive is 1:
 			say "DEBUG -> Combat Aborted because: [Name entry] has Banned: [BannedStatus entry][line break]";
@@ -151,22 +152,22 @@ To challenge:
 	rule succeeds;
 
 To Challenge (x - text):
-	let TargetFound be 0;
+	let TargetFound be false;
 	repeat with y running from 1 to number of filled rows in Table of Random Critters:
 		choose row y from the Table of Random Critters;
 		if Name entry is x or enemy title entry is x or enemy Name entry is x:
-			if BannedStatus entry is true: [banned creatures can't be challenged]
+			if BannedStatus entry is true and inasituation is false: [banned creatures can't be challenged]
 				if debugactive is 1:
 					say "DEBUG -> Can't challenge creature [Name entry] because it has Banned: [BannedStatus entry][line break]";
 				break;
 			else:
 				if debugactive is 1:
 					say "DEBUG -> Creature [x] found.[line break]";
-				now TargetFound is 1;
+				now TargetFound is true;
 				now MonsterID is y;
 				now monsterHP is HP entry;
 				break;
-	if TargetFound is 1:
+	if TargetFound is true:
 		challenge;
 	else:
 		say "     ERROR: Creature [x] not found.";

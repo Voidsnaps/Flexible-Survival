@@ -7,7 +7,7 @@ Version 1 of Zephyr Phone by Core Mechanics begins here.
 
 [changes -]
 
-Section 1 - Declarations and variables
+Chapter 0 - Declarations and variables
 
 emap is a number that varies. emap is usually 0.
 [ 0 = Nav Map not enabled ]
@@ -16,10 +16,10 @@ emap is a number that varies. emap is usually 0.
 zpc_inzone is a truth state that varies. zpc_inzone is false.
 [ true if Player is currenting displaying an image. This is referenced to display the no signal 'error' message when the player leaves ]
 
-zpc_Zc is a number that varies.[true if players location is listed on table of Zpc Location reference]
-zpc_Zf is a figure name that varies.[@Tag:NotSaved][contains the Icon entry of the figure to be displayed]
+zpc_Zc is a number that varies.[@Tag:NotSaved] [true if players location is listed on table of Zpc Location reference]
+[zpc_Zf is a figure name that varies.[@Tag:NotSaved] [contains the Icon entry of the figure to be displayed]]
 
-Section 2 - Master Referencing Table
+Chapter 1 - Master Referencing Table
 
 [MALL]
 Table of Zpc Location Reference
@@ -416,152 +416,96 @@ Richard's Room	Figure of emap_PAN_Frat_Richards_Room
 [Table of Zpc Location Reference (continued)
 location	figure_name]
 
-Section 3 - Objects
+Chapter 2 - Objects
 
 Table of Game Objects (continued)
 name	desc	weight	object
 "Broken smartphone"	"[zpcdesc2]"	1	Broken Smartphone
 
 to say zpcdesc2:
-	say "     Your smartphone is toast. Its screen is smashed, and while you hoped the damage was cosmetic after you tripped and smashed it against the sidewalk on your way to your present location, it has since proven to be bricked. Zephyr is known to sell many tech gadgets. Maybe one of their shops and such can repair it? You doubt a new phone is an option at this point, but it'd certainly help with navigation.";
+	say "     Your smartphone is toast. Its screen is smashed, and while you hoped the damage was cosmetic after you tripped and smashed it against the sidewalk on your way to your present location, it has since proven to be bricked. Zephyr is known to sell many tech gadgets. Maybe one of their shops and such can repair it? You doubt a new phone is an option at this point, but it'd certainly help with navigation. ";
 
 Broken Smartphone is a grab object. Broken Smartphone is not temporary.
+Usedesc of Broken Smartphone is "     It's bricked.[line break]".
 
 Table of Game Objects (continued)
 name	desc	weight	object
 "ZPC"	"[zpcdesc]"	1	zpc
 
 to say zpcdesc:
-	say "     The Zephyr Personal Communicator is essentially a slightly oversized smartphone. It is a surprisingly sleek piece of technology that almost feels out of place considering the environment around you, no doubt a display of Zephyr's dominance and power. Flipping the device over, you notice that its white rubber back is lined with solar panels. It seems that you don't have to worry about charging the device. The onyx black front display is smooth and glossy save for the Zephyr company logo on the top. You see a small orange button on the side of the device. Perhaps you could try to [bold type]use the zpc[roman type]?";
-
+	say "     The Zephyr Personal Communicator is essentially a slightly oversized smartphone. It is a surprisingly sleek piece of technology that almost feels out of place considering the environment around you, no doubt a display of Zephyr's dominance and power. Flipping the device over, you notice that its white rubber back is lined with solar panels. It seems that you don't have to worry about charging the device. The onyx black front display is smooth and glossy save for the Zephyr company logo on the top. You see a small orange button on the side of the device. Perhaps you could try to [bold type]use the ZPC[roman type]? ";
 
 zpc is a grab object. zpc is not temporary.
-understand "Zephyr Personal Communicator" as zpc.
 understand "zephyr personal communicator" as zpc.
+Usedesc of zpc is "[zpc_use]".
+
+Chapter 3 - Handling (Internal)
 
 zpcturnon is an action applying to nothing.
-Understand "turn on the zpc" as zpcturnon.
+Understand "turn on the/-- zpc" as zpcturnon.
 
 Carry out zpcturnon:
 	try using the zpc;
-
-Section 4 - Handling (Internal)
-
-Usedesc of Broken Smartphone is "[sp_use]";
-
-to say sp_use:
-	say "     It's bricked.";
-
-Usedesc of zpc is "[zpc_use]";
 
 to say zpc_use:
 	if emap is 0:
 		zpc_checklocation; [runs location check function first to fill Zc value]
 		if zpc_Zc is 0:
 			project the figure of emap_special_signalnotfound_icon;
-			say "     You turn on the device. It appears that your current location is not yet part of the Zephyr Satellite coverage region... Perhaps you could try the device in one of Zephyr's published compatible locations, such as the Smith Haven Mall?";
+			say "     You turn on the device. It appears that your current location is not yet part of the Zephyr satellite coverage region... Perhaps you could try the device in one of Zephyr's published compatible locations, such as the Smith Haven Mall?";
 			now emap is 1;
 			WaitLineBreak;
-			if debugactive is 1 and debuglevel > 1:
+			if debug is at level 2:
 				say "Following the ngraphics_blank rule";
 			follow the ngraphics_blank rule; [clear pic after WLB user response]
-		else if zpc_Zc is 1:
+		else:
 			say "     The device will now track and display your current location, until you exit the satellite coverage region. If you wish to terminate tracking while still in the coverage region, simply switch the device off.";
 			now emap is 1;
 			WaitLineBreak;
-			if debugactive is 1 and debuglevel > 1:
+			if debug is at level 2:
 				say "Following the zpc_lookoverride rule.";
 			follow the zpc_lookoverride rule; [fill with respective pic]
-	else if emap is 1:
+	else:
 		project the figure of emap_special_shutdown_icon; [off]
 		say "     After holding the power button for a few seconds, the display fades out as an accompanying chime completes its shutdown.";
 		now emap is 0;
 		WaitLineBreak;
-		if debugactive is 1 and debuglevel > 1:
+		if debug is at level 2:
 			say "Following the ngraphics_blank rule";
 		follow the ngraphics_blank rule; [clear pic after WLB user response]
 
-
-
-Section 4.1 - Internal functions
+Section 1 - Internal functions
 
 to zpc_checklocation: [returns Zc value of 1 or 0]
-	now zpc_Zc is 0;
-	if the location of Player is a location listed in Table of Zpc Location Reference, now zpc_Zc is 1;
+	if location of Player is a location listed in Table of Zpc Location Reference:
+		now zpc_Zc is 1;
+	else:
+		now zpc_Zc is 0;
 
-to zpc_getfigure: [returns Zf value of respective figure name]
-	now zpc_Zf is figure of pixel;
-	if the location of Player is a location listed in Table of Zpc Location Reference, now zpc_Zf is icon entry;
+[to zpc_getfigure: [returns Zf value of respective figure name]
+	if location of Player is a location listed in Table of Zpc Location Reference:
+		now zpc_Zf is icon entry;
+	else:
+		now zpc_Zf is Figure of pixel;]
 
-[to zpc_checklocation: [returns Zc value of 1 or 0]
-	if debugactive is 1:
-		say "Setting zpc_Zc to False.";
-	now zpc_Zc is 0; [zeros returning value]
-	repeat with n running from 1 to number of filled rows in Table of Zpc Location Reference:
-		choose row n in table of Zpc Location Reference;
-		if location entry is location of Player:
-			if debugactive is 1 and debuglevel > 1:
-				say "Found location in zpc location reference! Setting zpc_Zc to True.";
-			now zpc_Zc is 1; [returns value (true/false)]
-		else:
-			if debugactive is 1 and debuglevel > 1:
-				say "Did not find location in zpc location reference! zpc_Zc remains false.";
-to zpc_getfigure: [returns Zf value of respective figure name]
-	now zpc_Zf is figure of pixel; [zeros returning value]
-	repeat with n running from 1 to number of filled rows in Table of Zpc Location Reference:
-		choose row n in table of Zpc Location Reference;
-		if location entry is location of Player:
-			if debugactive is 1 and debuglevel > 1:
-				say "Found icon entry in table of zpc location reference! Storing Icon entry.";
-			now zpc_Zf is icon entry; [returns value for projection]]
-
-Section 5 - Handling (External)
+Chapter 4 - Handling (External)
 
 [Master look override rule]
 this is the zpc_lookoverride rule:
 	if emap is 1:
-		if the location of Player is a location listed in Table of Zpc Location Reference:
+		if location of Player is a location listed in Table of Zpc Location Reference:
 			project icon entry; [projecting intro]
 			if zpc_inzone is false, now zpc_inzone is true;
 		else if zpc_inzone is true: [case if Player already in zone]
-			project the figure of emap_special_signalnotfound_icon;
+			project the Figure of emap_special_signalnotfound_icon;
 			now zpc_inzone is false;
 
-[this is the zpc_lookoverride rule:
-	if emap is 1:
-		zpc_checklocation; [runs location check function first to fill Zc value]
-		if zpc_Zc is 1:
-			if zpc_inzone is false: [case if Player not in zone yet]
-				if debugactive is 1 and debuglevel > 1:
-					say "zpc_inzone is False, getting figure.";
-				zpc_getfigure; [runs function to get Zf value (figure name)]
-				if debugactive is 1 and debuglevel > 1:
-					say "Attempting to Project zpc_Zf.";
-				project zpc_Zf; [projecting intro]
-				if debugactive is 1 and debuglevel > 1:
-					say "setting Zpc_inzone to true. ";
-				now zpc_inzone is true;
-			else: [case if Player in zone]
-				if debugactive is 1 and debuglevel > 1:
-					say "zpc_inzone is True, getting figure.";
-				zpc_getfigure; [runs function to get Zf value (figure name)]
-				if debugactive is 1 and debuglevel > 1:
-					say "Attempting to Project zpc_Zf.";
-				project zpc_Zf;
-		else if zpc_Zc is 0: [case for player moving to location not contained in table of zpc location reference]
-			if debugactive is 1 and debuglevel > 1:
-				say "zpc_Zc is False. i'm not sure what happens here..";
-			if zpc_inzone is true: [case if Player already in zone]
-				if debugactive is 1 and debuglevel > 1:
-					say "zpc_Zc is false but zpc inzone is true. projecting signal not found and then setting zpc_inzone to false for shutdown..";
-				project the figure of emap_special_signalnotfound_icon;
-				now zpc_inzone is false;]
-
-Section 6 - DEBUG - Not for release
+Chapter 5 - DEBUG - Not for release
 
 [Cheat for enabling variable]
 cheat_emap is an action applying to nothing.
 understand "emap_cheat" as cheat_emap.
+
 carry out cheat_emap:
 	say "CHEAT: Map Navigation is now enabled (emap = 1)";
 	now emap is 1;
@@ -569,6 +513,7 @@ carry out cheat_emap:
 [Cheat that gives ZPC]
 cheat_zpc_give is an action applying to nothing.
 understand "zpc_cheat" as cheat_zpc_give.
+
 carry out cheat_zpc_give:
 	say "CHEAT: ZPC added to inventory";
 	ItemGain zpc by 1;
@@ -576,9 +521,9 @@ carry out cheat_zpc_give:
 [Cheat that gives freecred]
 cheat_freecred_give is an action applying to nothing.
 understand "freecred_cheat" as cheat_freecred_give.
+
 carry out cheat_freecred_give:
 	say "CHEAT: Added 100 freecred.";
 	increase freecred by 200;
-
 
 Zephyr Phone ends here.

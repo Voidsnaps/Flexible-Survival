@@ -3,7 +3,7 @@ Version 1 of Feats by Core Mechanics begins here.
 
 "Controls feats for Flexible Survival"
 
-Section 0 - Definitions (feat-based)
+Part 0 - Definitions (feat-based)
 
 A person can be submissive. A person is usually not submissive.
 
@@ -47,6 +47,8 @@ Definition: A person (called x) is FemalePreferred: [player wants to or must rem
 
 Definition: A person (called x) is HermPreferred: [player wants to or must remain herm]
 	if "Herm Preferred" is listed in feats of x, yes;
+	if "Male Preferred" is listed in feats of x or "Female Preferred" is listed in feats of x or "Single Sexed" is listed in feats of x, no;
+	if "Always Cocky" is listed in feats of x and "Always A Pussy" is listed in feats of x, yes;
 	no;
 
 Table of gainable feats
@@ -54,19 +56,23 @@ title	subtable	description	toggle
 "Nothing"	--	"Nothing here."	gainfeat rule
 with 100 blank rows.
 
-Section 1 - Basic Feats
+Part 1 - Basic Feats
+
+The player has a number called featgained.
+
+A featset is a kind of thing.
+A featset can be functional. A featset is usually not functional.
 
 basic feats is a featset.
-A featset can be functional. A featset is usually not functional.
 basic feats is functional.
+
 fun feats is a featset.
+
 featunlock is a number that varies.	[linked to Dr. Matt/Dr. Mouse hospital quest]
 autofeatloading is a truth state that varies. autofeatloading is usually false.
 boosterfeats is a number that varies. boosterfeats is usually 0.
-muggerison is a truth state that varies. muggerison is usually true.
-FeralBirths is a number that varies. FeralBirths is usually 0.
 vampiric is a truth state that varies. vampiric is usually false.
-The player has a number called featgained.
+Featqualified is a number that varies. Featqualified is usually 0.
 
 FeatList is an action applying to nothing.
 understand "Feats List" as FeatList.
@@ -77,7 +83,7 @@ understand "Feats" as FeatList.
 
 carry out FeatList:
 	sort Feats of Player;
-	say "Feats: [Feats of Player]";
+	say "Feats: [if feats of Player is empty]None[else][Feats of Player][end if].";
 
 Featgetting is an action applying to nothing.
 understand "volunteer" as featgetting.
@@ -97,9 +103,6 @@ Check featgetting:
 carry out featgetting:
 	featget;
 
-Featqualified is a number that varies.
-Featqualified is usually 0.
-
 To Featget:
 	blank out the whole of table of gainable feats;
 	repeat with x running through functional featsets:
@@ -108,28 +111,26 @@ To Featget:
 		say "There are no feats to gain!";
 		wait for any key;
 	else:
-		[change the current menu to table of Gainable Feats;
-		carry out the displaying activity;]
 		now featqualified is 1;
 		while 1 is 1:
 			repeat with y running from 1 to number of filled rows in table of gainable feats:
 				choose row y from the table of gainable feats;
 				say "[link][y] - [title entry][as][y][end link][line break]";
-			say "[link]0 - ABORT[as]0[end link][line break]";
+			say "[link]0 - Abort[as]0[end link][line break]";
 			say "Type the number corresponding to the feat you want> [run paragraph on]";
 			get a number;
 			if calcnumber > 0 and calcnumber <= the number of filled rows in table of gainable feats:
 				now current menu selection is calcnumber;
 				follow the gainfeat rule;
 				if featqualified is 0, break;
-			else if Playerinput matches "0":	[do not use calcnumber, as non-numbers will return 0]
+			else if calcnumber is 0:
+				LineBreak;
 				say "Selection aborted.";
 				continue the action;
 			else:
 				say "Invalid Feat.";
 
 featgrabbing is an action applying to one topic.
-
 understand "featgrab [text]" as featgrabbing.
 
 Check featgrabbing:
@@ -155,7 +156,7 @@ To FunFeatget:
 			repeat with y running from 1 to number of filled rows in table of gainable feats:
 				choose row y from the table of gainable feats;
 				say "[link][y] - [title entry][as][y][end link]: [description entry][if title entry is not listed in L]. [end if][line break]";
-			say "[link]0 - ABORT[as]0[end link][line break]";
+			say "[link]0 - Abort[as]0[end link][line break]";
 			say "Type the number corresponding to the feat you want> [run paragraph on]";
 			get a number;
 			if calcnumber > 0 and calcnumber <= the number of filled rows in table of gainable feats:
@@ -163,8 +164,9 @@ To FunFeatget:
 				follow the gainfeat rule;
 				if featqualified is 0: [player had a right to a feat and got it]
 					decrease featgained of Player by 1; [fun feats are not counted]
-				if featqualified is 0, break;
-			else if Playerinput matches "0":	[do not use calcnumber, as non-numbers will return 0]
+					break;
+			else if calcnumber is 0:
+				LineBreak;
 				say "Selection aborted.";
 				continue the action;
 			else:
@@ -195,21 +197,21 @@ instead of addfeating the fun feats:
 		if isHellhound is false:
 			addfeat "Always Cocky" with "Outside of special circumstances, you will always keep a cock";
 			addfeat "Always A Pussy" with "Outside of special circumstances, you will always keep a pussy";
-	if Player is MalePreferred:
+	if "Male Preferred" is listed in feats of Player:
 		if "Flat Chested" is not listed in feats of Player, addfeat "Breasts" with "Despite being all male, you still grow breasts - curious";
-	else if "Male Preferred" is not listed in feats of Player and "Breasts" is not listed in feats of Player:
-		addfeat "Flat Chested" with "Your chest tends to remain flat";
-	if "Modest Organs" is not listed in feats of Player and "Passing Grade Chest" is not listed in feats of Player:
+	else:
+		if "Breasts" is not listed in feats of Player, addfeat "Flat Chested" with "Your chest tends to remain flat";
+	if "Modest Organs" is not listed in feats of Player and ("Passing Grade Chest" is not listed in feats of Player or Breast Size of Player < 5):
 		addfeat "One Way" with "You can only grow larger, not smaller, sexually - barring specific effects";
 	if "One Way" is not listed in feats of Player:
 		addfeat "Modest Organs" with "Your genital growth is restricted, preventing wildly overgrown bits, barring specific effects";
-	if "One Way" is not listed in feats of Player and "Flat Chested" is not listed in feats of Player:
+	if ("One Way" is not listed in feats of Player or Breast Size of Player < 5) and "Flat Chested" is not listed in feats of Player:
 		addfeat "Passing Grade Chest" with "Your breasts will never fail a test, and will remain D cupped or smaller, barring specific effects. If they do become too large, they will shrink rapidly back into line";
 	if "All The Things" is not listed in feats of Player and ("One Way" is not listed in feats of Player or (Cock Count of Player < 2 and Cunt Count of Player < 2)):
 		addfeat "Just One" with "You will only grow one cock, and only one cunt, never more. Possibly less";
 	if "Just One" is not listed in feats of Player:
 		addfeat "All The Things" with "Your groin seems to believe [']the more the merrier[']. Outside of a gender change, you will keep any [']extras['] you pick up";
-	if "Bouncy Bouncy" is not listed in feats of Player and ("One Way" is not listed in feats of Player or Nipple Count of Player is 2):
+	if "Bouncy Bouncy" is not listed in feats of Player and ("One Way" is not listed in feats of Player or Nipple Count of Player < 3):
 		addfeat "One Pair" with "You will not grow more than two breasts";
 	if "One Pair" is not listed in feats of Player:
 		addfeat "Bouncy Bouncy" with "It seems that your body likes breasts a lot. You won't be losing any that you might gain";
@@ -241,7 +243,7 @@ instead of addfeating the fun feats:
 		addfeat "Dominant" with "Defeating monsters gets you excited, gaining a small libido, morale or XP boost from it. It may occasionally open new, dominant scene variations";
 	if Strange Serpent is resolved or scenario is "Forgotten":
 		addfeat "Touched by Madness" with "On your travels you appear to have contracted some manner of strange aura which may cause some monsters to behave weirdly around you. (Caution, you may experience more extreme content by choosing this feat.)";
-	addfeat "Instinctive Combat" with "With all the changes, you've gained new instincts on how to fight. You may choose [bold type]auto attack normal/berserk/pass/coward/submit[roman type]"; [put next to submissive because that seemed logical. move elsewhere if so desired.]
+	addfeat "Instinctive Combat" with "With all the changes, you've gained new instincts on how to fight. You may choose [bold type]auto attack normal/berserk/seduce/pass/coward/submit[roman type]"; [put next to submissive because that seemed logical. move elsewhere if so desired.]
 	if featunlock is 1:	[available after hospital quest]
 		addfeat "Perky" with "You are of positive spirits, regaining morale gradually and +20% max morale";
 	if "Strong Psyche" is not listed in feats of Player, addfeat "Weak Psyche" with "Having a higher mental susceptibility to corruption by the nanites, you have a weaker grip on your human identity";
@@ -273,7 +275,7 @@ instead of addfeating the basic feats:
 			if "Good Teacher" is listed in feats of Player:
 				addfeat "Ringmaster" with "You will gain full XP while training your pets";
 		if charisma of Player > 16 and number of entries in list of tamed pets > 2:
-			addfeat "Double Team" with "You can now take one additional ally with you";[continue]
+			addfeat "Double Team" with "You can now take one additional ally with you"; [continue]
 		if charisma of Player > 11:
 			addfeat "Flash" with "Your skin/fur/scales will occasionally flash bright light, reducing your foe's chance to hit";
 		if charisma of Player > 13:
@@ -301,7 +303,7 @@ instead of addfeating the basic feats:
 		addfeat "Fast Learner" with "You assimilate new information rapidly. -20% XP needed to level";
 		addfeat "Expert Medic" with "You are especially good at using medkits, +25% hitpoints restored per use, and adds an additional use to medkits";
 	if intelligence of Player > 12 and ( BodyName of Player is not "Human" or FaceName of Player is not "Human" ):
-		addfeat "Know Thyself" with "By thinking like an enemy that has infected you, you know better how to deal with them and gain a +0 to +2 bonus to hit matching enemies each round. Thinking with your other head gradually gets your infected loins more excited as well. You gain more XP from these fights as well";
+		addfeat "Know Thyself" with "By thinking like an enemy that has infected you, you know better how to deal with them and gain a +0 to +4 bonus to hit matching enemies each round. Thinking with your other head gradually gets your infected loins more excited though. You gain more XP from these fights as well";
 	if intelligence of Player > 15 and level of Player > 5:
 		addfeat "Weaponsmaster" with "Your experience and knowledge allow you to assess a weapon's worth and wield it better";
 	addfeat "Wary Watcher" with "Always on guard, creatures won't gain first strike on you";
@@ -361,39 +363,46 @@ This is the gainfeat rule:
 		say "Is this what you want?";
 	if autofeatloading is true or player consents:
 		add nam to feats of Player;
-		say "You have gained '[nam]'!";
+		say "[line break]You have gained '[nam]'!";
 		now Featqualified is 0;
-[		decrease menu depth by 1; ]
 		increase featgained of Player by 1;
-		if nam is "Automatic Survival":
-			decrease featgained of Player by 1;
-			remove "Automatic Survival" from feats of Player;
-			say "[bold type]This ability is now controlled by Trixie. Your feat slot has been returned to you.[roman type][line break]";
-			wait for any key;
-		else if nam is "Strong Back":
-			increase capacity of Player by 50;
-		else if nam is "More Time":
-			extend game by 24;
-		else if nam is "Hardy":
-			increase MaxHP of Player by 8;
-			increase HP of Player by 8;
-		else if nam is "City Map":
-			say "[BestowCityMapFeat]";
-		else if nam is "Instinctive Combat":
-			say "     Having gained the [']Instinctive Combat['] feat, you now have access to the 'Auto Attack' command. These are the same as picking the same option over and over again during combat. No different results, just less typing for faster gameplay.[line break]Type [bold type][link]auto attack normal[end link][roman type] for the default method of combat (choose each action).[line break]Type [bold type][link]auto attack berserk[end link][roman type] to always attack in combat.[line break]Type [bold type][link]auto attack pass[end link][roman type] to always pass in combat.[line break]Type [bold type][link]auto attack coward[end link][roman type] to always flee in combat.[line break]Type [bold type][link]auto attack submit[end link][roman type] to always submit in combat.[line break]You may review these commands at any time by using the [link]help[end link] command.";
-		else if nam is "Vore Predator":
-			say "     Having gained the [']Vore Predator['] feat, you can now access the [bold type]vore menu[roman type] command. It can also be accessed using Trixie's cheat menu ([bold type]iwannacheat[roman type]). It is used for adjusting vore-related game settings.";
-		else if nam is "Mugger":
-			say "     You will now get a flat rate increase to item drops from monsters based on your perception. This ability can be can turned on or off by using the [bold type]mugger[roman type] command and is currently [bold type][if muggerison is true]ON[else]OFF[end if][roman type].";
-		else if nam is "Vampiric":
-			say "     You will now recover a small amount of health, thirst and hunger after every victory as you get in a blood-sucking bite after your final blow or at some other point during the victory scene.";
-			now vampiric is true;
-	if autofeatloading is false, wait for any key;
-	if autofeatloading is false, clear the screen and hyperlink list;
+		if nam is:
+			-- "Automatic Survival":
+				decrease featgained of Player by 1;
+				remove "Automatic Survival" from feats of Player;
+				say "[bold type]This ability is now controlled by Trixie. Your feat slot has been returned to you.[roman type][line break]";
+				wait for any key;
+			-- "Sterile":
+				now Sterile of Player is true;
+			-- "Strong Back":
+				increase capacity of Player by 50;
+			-- "More Time":
+				extend game by 24;
+			-- "Hardy":
+				increase MaxHP of Player by 8;
+				increase HP of Player by 8;
+			-- "Expert Medic":
+				increase CurrentMedkitSupplies by 1;
+			-- "City Map":
+				say "[BestowCityMapFeat]";
+			-- "Instinctive Combat":
+				say "[line break]Having gained the [']Instinctive Combat['] feat, you now have access to the [']Auto Attack['] commands. These are the same as picking the same option over and over again during combat. No different results, just less typing for faster gameplay.";
+				say "Type [bold type]auto attack normal[roman type] for the default method of combat (choose each action). Type [bold type]auto attack berserk[roman type] to always attack in combat. Type [bold type]auto attack seduce[roman type] to always seduce in combat. Type [bold type]auto attack pass[roman type] to always pass in combat. Type [bold type]auto attack coward[roman type] to always flee in combat. Type [bold type]auto attack submit[roman type] to always submit in combat.";
+				say "You may review these commands at any time by using the [bold type]help[roman type] command.";
+			-- "Vore Predator":
+				say "[line break]Having gained the [']Vore Predator['] feat, you can now access the [bold type]vore menu[roman type] command. It can also be accessed using Trixie's cheat menu ([bold type]iwannacheat[roman type]). It is used for adjusting vore-related game settings.";
+			-- "Mugger":
+				say "[line break]You will now get a flat rate increase to item drops from monsters based on your perception. This ability can be can turned on or off by using the [bold type]mugger[roman type] command and is currently [bold type][if muggerison is true]On[else]Off[end if][roman type].";
+			-- "Vampiric":
+				say "[line break]You will now recover a small amount of health, thirst and hunger after every victory as you get in a blood-sucking bite after your final blow or at some other point during the victory scene.";
+				now vampiric is true;
+	if autofeatloading is false:
+		wait for any key;
+		clear the screen and hyperlink list;
 	sort feats of Player;
 
 to say BestowCityMapFeat:
-	say "[bold type][']Approaching the Capitol Building['], [']Beach Plaza['], [']City Hospital['], [']College Campus['], [']Dry Plains['], [']Entrance to the High Rise District['], [']Entrance to the Red Light District['], [']Museum Foyer['], [']Outside Trevor Labs['], [']Park Entrance['], [']Plant Overview['], [']Smith Haven Mall Lot South['], [']State Fair['], [']Urban Forest['], [']Warehouse District['] and [']Zoo entrance['][roman type] have been added to your list of available navpoints. You will now be able to [bold type]nav[roman type]igate there from any of the fasttravel locations in the city.";
+	say "[line break][bold type][']Approaching the Capitol Building['], [']Beach Plaza['], [']City Hospital['], [']College Campus['], [']Dry Plains['], [']Entrance to the High Rise District['], [']Entrance to the Red Light District['], [']Museum Foyer['], [']Outside Trevor Labs['], [']Park Entrance['], [']Plant Overview['], [']Sinking Swamps['], [']Smith Haven Mall Lot South['], [']State Fair['], [']Urban Forest['], [']Warehouse District['] and [']Zoo entrance['][roman type] have been added to your list of available navpoints. You will now be able to [bold type]navigate[roman type] there from any of the fast travel locations in the city.";
 	AddNavPoint Approaching the Capitol Building silently;
 	AddNavPoint Beach Plaza silently;
 	AddNavPoint City Hospital silently;
@@ -405,6 +414,7 @@ to say BestowCityMapFeat:
 	AddNavPoint Outside Trevor Labs silently;
 	AddNavPoint Park Entrance silently;
 	AddNavPoint Plant Overview silently;
+	AddNavPoint Sinking Swamps silently;
 	AddNavPoint Smith Haven Mall Lot South silently;
 	AddNavPoint State Fair silently;
 	AddNavPoint Urban Forest silently;
@@ -413,10 +423,13 @@ to say BestowCityMapFeat:
 	now Government Assistance is resolved; [removes the random event for discovering the Capitol Bldg]
 	now Ravaged Power Plant is resolved; [removes the random event for discovering the power plant]
 	now Reaching the College is resolved; [removes the random event for discovering the College Campus]
+	now Strange New Land is resolved; [removes the random event for discovering the Sinking Swamps]
 
 Part 2 - Feat-Given Actions
 
 Chapter 1 - Mugging
+
+muggerison is a truth state that varies. muggerison is usually true.
 
 muggering is an action applying to nothing.
 understand "mugger" as muggering.
@@ -430,14 +443,14 @@ carry out muggering:
 		now muggerison is true;
 	else:
 		now muggerison is false;
-	say "The 'Mugger' feat is now [bold type][if muggerison is true]ON[else]OFF[end if][roman type]. You will gain drop items [if muggerison is true]more frequently[else]as normal[end if].";
+	say "The [']Mugger['] feat is now [bold type][if muggerison is true]On[else]Off[end if][roman type]. You will gain item drops [if muggerison is true]more frequently[else]as normal[end if].";
 
 Chapter 2 - Autoattack
 
 autoattackmode is a number that varies.
 [0 is normal]
 [1 is attack]
-[2 could be item? but probably not...]
+[2 is seduce]
 [3 is pass]
 [4 is flee]
 [5 is submit]
@@ -446,52 +459,67 @@ autoattackmode is a number that varies.
 autoattacknormal is an action applying to nothing.
 understand "auto attack normal" as autoattacknormal.
 
+check autoattacknormal:
+	if "Instinctive Combat" is not listed in feats of Player:
+		say "You feel you are missing the instincts to do this." instead;
+
+carry out autoattacknormal:
+	now autoattackmode is 0; [default combat, make choices at normal]
+	say "You calm your instincts and regain control of your actions.";
+
 autoattackberserk is an action applying to nothing.
 understand "auto attack berserk" as autoattackberserk.
+
+check autoattackberserk:
+	if "Instinctive Combat" is not listed in feats of Player:
+		say "You feel you are missing the instincts to do this." instead;
+
+carry out autoattackberserk:
+	now autoattackmode is 1; [autoattack, no choice, always attack]
+	say "You let your aggressive instincts take the forefront, knowing you will attack at any chance.";
+
+autoattackseduce is an action applying to nothing.
+understand "auto attack seduce" as autoattackseduce.
+
+check autoattackseduce:
+	if "Instinctive Combat" is not listed in feats of Player:
+		say "You feel you are missing the instincts to do this." instead;
+
+carry out autoattackseduce:
+	now autoattackmode is 2; [autoseduce, no choice, always seduce]
+	say "You know they want it at least as much as you do. Make them come and get it.";
 
 autoattackpass is an action applying to nothing.
 understand "auto attack pass" as autoattackpass.
 
+check autoattackpass:
+	if "Instinctive Combat" is not listed in feats of Player:
+		say "You feel you are missing the instincts to do this." instead;
+
+carry out autoattackpass:
+	now autoattackmode is 3; [autopass, no choice, always pass]
+	say "You feel calm. You're sure everything will work out in the end. Don't mind the monsters attacking you.";
+
 autoattackcoward is an action applying to nothing.
 understand "auto attack coward" as autoattackcoward.
+
+check autoattackcoward:
+	if "Instinctive Combat" is not listed in feats of Player:
+		say "You feel you are missing the instincts to do this." instead;
+
+carry out autoattackcoward:
+	now autoattackmode is 4; [autoflee, no choice, always flee]
+	say "You focus on the need to escape the monsters, the need to run away.";
 
 autoattacksubmit is an action applying to nothing.
 understand "auto attack submit" as autoattacksubmit.
 
-carry out autoattacknormal:
-	if "Instinctive Combat" is listed in feats of Player:
-		now autoattackmode is 0; [default combat, make choices at normal]
-		say "You calm your instincts and regain control of your actions.";
-	else:
-		say "You feel you are missing the instincts to do this.";
-
-carry out autoattackberserk:
-	if "Instinctive Combat" is listed in feats of Player:
-		now autoattackmode is 1; [autoattack, no choice, always attack]
-		say "You let your aggressive instincts take the forefront, knowing you will attack at any chance.";
-	else:
-		say "You feel you are missing the instincts to do this.";
-
-carry out autoattackpass:
-	if "Instinctive Combat" is listed in feats of Player:
-		now autoattackmode is 3; [autopass, no choice, always pass]
-		say "You feel calm. You're sure everything will work out in the end. Don't mind the monsters attacking you.";
-	else:
-		say "You feel you are missing the instincts to do this.";
-
-carry out autoattackcoward:
-	if "Instinctive Combat" is listed in feats of Player:
-		now autoattackmode is 4; [autoflee, no choice, always flee]
-		say "You focus on the need to escape the monsters, the need to run away.";
-	else:
-		say "You feel you are missing the instincts to do this.";
+check autoattacksubmit:
+	if "Instinctive Combat" is not listed in feats of Player:
+		say "You feel you are missing the instincts to do this." instead;
 
 carry out autoattacksubmit:
-	if "Instinctive Combat" is listed in feats of Player:
-		now autoattackmode is 5; [autosubmit, no choice, always submit]
-		say "Your increased libido clouds your thinking. Wouldn't it be fun to let the monsters play with you?";
-	else:
-		say "You feel you are missing the instincts to do this.";
-
+	now autoattackmode is 5; [autosubmit, no choice, always submit]
+	say "Your increased libido clouds your thinking. Wouldn't it be fun to let the monsters play with you?";
 
 Feats ends here.

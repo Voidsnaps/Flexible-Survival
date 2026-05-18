@@ -105,6 +105,10 @@ A postimport rule:
 	if Finding Alp sixty nine is resolved and Industrial canning facility is unresolved:
 		now Finding Alp sixty nine is unresolved;
 
+A postimport rule:
+	if carried of Sundered Codex < 1:
+		itemGain Sundered Codex by 1;
+
 LastAvamilked is a number that varies. LastAvamilked is usually 250.
 
 
@@ -2194,11 +2198,11 @@ Sarea of Good Kitty Meets Her Kids is "Nowhere".
 
 to say ResolveEvent Good_Kitty_Meets_Her_Kids:
 	say "     Making your way along the road to the Last Chance, you overhear a minor din of activity from behind the curtain wall. Listening closely, you can just barely make out the sounds of pained grunts and claws scraping along the blacktop. Fear like you've never known grips your heart as you rush to the gate, heedless of danger as your maternal instincts scream at you to find and protect Ava and your kittens, no matter the cost. Bounding to the gate as fast as your legs can carry you. You kick the thing open and unsheath your talons, ready to fell anything that threatens your family. However, the sight that greets you is not what you'd expected. Gathered in a circle in the courtyard, you spot eight Margay Taurs who you instantly recognize on some intrinsic level as yours. Each one is as large as Ava and covered in strips of blue powder from head to toe save for their paws, which are dyed red. They appear to be circling around a shirtless Drake like a pack of hunting cats.";
-	say "     In his hands, he wields a pair of crudely carved foam tonfa covered in the same blue colored dye coating your children's fur. The sight makes your choler rise and bubble as you're about to scream at him and demand to know what he's doing to your precious babies. But a slightly slimmer Ava yells for attention as she runs over to your side from inside the garage. 'Hey [Name of Player] you're just in time to see the end of today's lessons.'  Lessons? You query, eyeing up the improvised thunder dome you've walked into. 'Ya daddy's teaching them how to fight as a group. He says wants to make sure they're able to hold their own out in the city if you guys ever get separated. They're doing pretty good actually, one of them almost landed a hit before you got here,' Ava replies proudly. 'Ya,' Drake huffs, sounding a little fatigued but nonetheless pleased. 'Your girls are pretty quick on the uptake. Don't know if it's the nanites, or their parents['] good genes, but your kitten here are fast learners.'";
+	say "     In his hands, he wields a pair of crudely carved foam tonfa covered in the same blue colored dye coating your children's fur. The sight makes your choler rise and bubble as you're about to scream at him and demand to know what he's doing to your precious babies. But a slightly slimmer Ava yells for attention as she runs over to your side from inside the garage. 'Hey [Name of Player] you're just in time to see the end of today's lessons.' Lessons? You query, eyeing up the improvised thunder dome you've walked into. 'Ya daddy's teaching them how to fight as a group. He says wants to make sure they're able to hold their own out in the city if you guys ever get separated. They're doing pretty good actually, one of them almost landed a hit before you got here,' Ava replies proudly. 'Ya,' Drake huffs, sounding a little fatigued but nonetheless pleased. 'Your girls are pretty quick on the uptake. Don't know if it's the nanites, or their parents['] good genes, but your kitten here are fast learners.'";
 	WaitLineBreak;
 	say "     'Ah, thanks grandpa Drake,' one of your daughters remarks as she swipes at Drake's legs with her left hand as if she were about to claw his torso. Despite her nanite-enhanced speed, Drake backpedals around the blow. A word or two of advice bubbles then dies in your chest, as you realize that her attack was a feint as she swings her forepaw at him. Once again, she's too slow though as he ducks under her limb and slashes at her leg, leaving a fresh blue smear on her pelt. 'That's your leg gone sweetie,' Drake grunts rolling away from her as your daughter tucks her paw into her side. 'You ladies need practice working together! Don't come at me one at a time anymore. You're more than your sisters, you're a pack, er,' he hesitates, his catty amber eyes rolling towards the clouds then back to your kitten, 'pride, you should be more in tune with each other. So let's go, AGAIN!' Drake bellows sounding like a football coach, bashing his tonfa against each other releasing a cloud of blue powder while he takes a formless guarded stance.";
 	say "     'YES SIR!' Your girls roar in unison as they circle about him like a proper pride. With no small amount of joy, you watch your daughters launch feints and probing at their prey, forcing Drake to split his attention between them. His movements are quick and fluid as parries and dodges your little ones strikes with practiced ease. Yet, you can see the limits in his defenses conferred by his lesser bipedal body. He only has two arms, two legs, two eyes, and a reach of a few feet. Your daughters meanwhile are not so inhibited, as they press their tauric advantage, attacking in groups of three. They claw, kick, and bat at him with their natural armaments from every direction. Drake struggles to keep up. His body twists and weaves around the savage attacks like he was made of water and wind, not flesh and bone. Tough as he may be, his body and the nanites can only be pushed so far.";
-	WaitLineBreak; 
+	WaitLineBreak;
 	say "      Sweat glistens from his brow and pours down the toned hills of his sternum like a river of shimmering diamonds, his pecs heave with each ragged breath as he ducks one of your daughters paws and tries unsuccessfully to aim a riposte at their under belly. Your girls however have hardly broken a sweat as they dance between each other, careful not to impede their litter-mates['] avenues of attack and egress. Large as they are, you imagine it would be easy for them to trip over one another. Still, they keep a rough cohesion without speaking despite their inexperience. You can almost taste the air of inevitability as their train of blows rain down on the little human's guard forcing him to his knees. '*Huff* *huff* don't get cocky girls, I'm not out of this yet!' Drake pants as he lunges between your daughter and slash at their undercarriage while he passes under them. 'Your down hun,' Drake rumbles rolling out from underneath as your daughter feigns a collapse. 'Come on girls, I believe in you! You're not gonna let some old man show you up in front of your moms!' Drake jeers climbing to his feet, with his back to your daughter's prone form.";
 	say "     'Heck no!' one of them cries, charging in like a bull seeing red as she tries to swat him with an over-handed swipe. 'Ha, good effort sweetie, but you shouldn't break rank,' Drake sneers, leaping back and slashing at her paw. He lands on your defeated daughter's side, motioning for the rest of them to come at him. Your daughter stares at the blue streak on her paw for a moment before charging again, but this time she's not alone. Two others join, trying to pincer Drake between them. No way is he getting out of this, you muse, watching five sets of red paws come down at him from different angles. At the last moment though, Drake jumps and bounds between their outstretched arms as he slashes at their faces. 'Fudge,' you hear one of them grumble as they playfully collapse on another in a pile. 'No fair grandpa, you're so small, how can we hit you!?' one of the girls moans exasperatedly from underneath her litter-mates.";
 	WaitLineBreak;
@@ -6394,7 +6398,7 @@ to say Collection:
 
 to say TFstuff:
 	if scenario is "Researcher":
-		say "    You know, you rumble with catty delight, she doesn't need that silly little collector if she wants to be Margay taur. After all, you've got plenty of creamy TF juice right here, you tease groping your taut furry [Breast Size of Player] breasts with a pair of your glossy tendrils. 'Uh,' the little human stammers as she shamelessly gazes at the furrows cast by your feeler as it coddles the supple hills of your opulent rack as you gleefully swaddle your pillowy mounds in their worshipful embrace. 'I don't think that will work, I'm sort of, well...' she pauses as a low hungry rumble flickers through her core, 'immune to that stuff thanks to the boosters, so I'd need raw nanite slurry if I want to change. It's a kind offer though, you do look super yummy,' Becky simpers, eyeing your chest. Ha, you snicker, you thought that too once. Luckily those boosters they've been handing out only work on the common lesser strains. Rare ones like yours, you tease motioning to your tauric splendor, cut through that nonsense, and if you're wrong, she can always collect some vials later. You proffer, in a domineering tone as you roll on your back exposing your regal fecund form. 'Well... ah what the heck I'll give it a shot. Either way I get to touch taut taur tum,' she says, kneeling beside you.";
+		say "    You know, you rumble with catty delight, she doesn't need that silly little collector if she wants to be Margay taur. After all, you've got plenty of creamy TF juice right here, you tease groping your taut furry [Breast Size desc of Player] breasts with a pair of your glossy tendrils. 'Uh,' the little human stammers as she shamelessly gazes at the furrows cast by your feeler as it coddles the supple hills of your opulent rack as you gleefully swaddle your pillowy mounds in their worshipful embrace. 'I don't think that will work, I'm sort of, well...' she pauses as a low hungry rumble flickers through her core, 'immune to that stuff thanks to the boosters, so I'd need raw nanite slurry if I want to change. It's a kind offer though, you do look super yummy,' Becky simpers, eyeing your chest. Ha, you snicker, you thought that too once. Luckily those boosters they've been handing out only work on the common lesser strains. Rare ones like yours, you tease motioning to your tauric splendor, cut through that nonsense, and if you're wrong, she can always collect some vials later. You proffer, in a domineering tone as you roll on your back exposing your regal fecund form. 'Well... ah what the heck I'll give it a shot. Either way I get to touch taut taur tum,' she says, kneeling beside you.";
 		say "[Becky TF]";
 	else:
 		say "     Thinking about it, you've never had the chance to turn someone yourself. Sure, there may have been one or two times you slipped people a tainted item, or you might have had another assist you, but you've never turned a person on your own the old fashion way. After all, if Ava can do it, so can you. Plus, if she is willing to take the plunge why can't you join in on the fun. You muse as you lay out your plan to her while you lie back and expose your array of furry breasts to the eager woman. 'Hm, I don't know. I'm like 99% sure I'm immune but...' she trails off staring intently at your chest and gentle wobble of your plush middle as you lovingly paw at the verdant swell of your supple tums. 'This does sound fun, and if it doesn't work I can still get the collector later,' she trills, sounding rather pleased as she kneels down beside you.";
@@ -8561,10 +8565,12 @@ to say SCUse:
 	add "Kathy?" to Codex_section_Choices;
 	add "Dragon Raider Galaxite?" to Codex_section_Choices;
 	add "Dragon Breeder?" to Codex_section_Choices;
+	add "Breeder Cult?" to Codex_section_Choices;
 	add "Hermacore?" to Codex_section_Choices;
 	add "HELP! I can't have sex with Ava!" to Codex_section_Choices;
 	add "Toggle Touched by Madness?" to Codex_section_Choices;
 	add "Switch between dom, sub, and vanilla?" to Codex_section_Choices;
+	add "Ipotane?" to Codex_section_Choices;
 	if "Touched by Madness" is listed in feats of Player:
 		add "Cyn?" to Codex_section_Choices;
 	let Codex_section_Choice be what the player chooses from Codex_section_Choices;
@@ -8586,10 +8592,13 @@ to say SCUse:
 			WaitLineBreak;
 			say "     Once you arrive at the supply the Player will have a second chance to impress Galaxite's brood and perhaps even take one step closer to bed her eldest feral sea dragon son, assuming they have a cunt. As with the prior event, the faux boss fight is rather hard due to the enemy's chip damage, though the encounter can be bypassed with high, Int, Perception, or by sacrificing an eclectic prod found at the zoo. Afterwards, the Player will encounter one final road block in their mighty quest for epic loot that can be resolved with intelligence, charisma, or by letting Galaxite's kids take care of it. Upon completion of this event, the final leg of act one and the current end of her content will open up as Loot Boxes will become active. Discoverable by once more hunting in the beach area, Loot Boxes offers some unique sex scenes for male and intersex Dragontaurs, Margay Taurs, Tiger Taurs, Pather Taurs, and other non equine taurs. In addition, late stage female Margay Taurs and Dragontaurs also have their own special lewds available. Alongside a plethora of gear, items, and a rare chance to become human again, for a price...";
 		-- "Dragon Breeder?":
-			say "     A powerful evolving form gained by fucking Galaxite during the beach reunion event while having a pussy, being pregnant, and having the dominant feat. This form has its own special parallel arc from Dragon Raider Galaxite that is advanced via walk-in events which only fire while the Player is a pureblooded Dragon Breeder with pussy. In addition, Players with Strong Psyche or Weak Psyche will have special options opened to them. Much like the main story for Dragon Raider Galaxite, the first event Final Event which is started by walking into the wild Fringes section of the beach. Much like its sister event Ruined Trawler, the Player can either fight or cow the guardians of this place with high strength, yet unlike the other story line its possible to play with the Fruit bats, and later recruit them in act three. While the follow up event Point Nemo can be started upon entering the end of the beach, here Players can choose to breed and recruit several shark herms to become priestess's of their own personal.";
+			say "     A powerful evolving form gained by fucking Galaxite during the beach reunion event while having a pussy, being pregnant, and having the dominant feat. This form has its own special parallel arc from Dragon Raider Galaxite that is advanced via walk-in events which only fire while the Player is a pureblooded Dragon Breeder with pussy. Note: due to the some eldrtich interactions with the preg code, if the player was been knocked any Ebonflame creature, the Snake out in the dry plains, Black Wasp parasite, or any womb hijacking pregancy the TF scene will not fire. In addition, Players with Strong Psyche or Weak Psyche will have special options opened to them. Much like the main story for Dragon Raider Galaxite, the first event Final Event which is started by walking into the wild Fringes section of the beach. Akin to its sister event Ruined Trawler, the Player can either fight or cow the guardians of this place with high strength, yet unlike the other story line its possible to play with the Fruit bats, and later recruit them in act three. While the follow up event Point Nemo can be started upon entering the end of the beach, here Players can choose to breed and recruit several shark herms to become priestess's of their own personal cult.";
 			say "     Doing so also unlocks one of two new mutations based on whether or not the Player has both the Vore Pred and UB Pred feats. Either way another tough, but skippable fight awaits assuming the Player is willing to submit to a growing presence in the back of their mind, or bluff their way out of it with high charisma or perception. Afterwards, the Player will be presented with two choices, continue serving their patron or spurn them and devolve back into a puny human. Should they continue to serve that last section of act one, Just Rewards will activate and can be started by visiting the rocky cliffs area in the beach zone. Here knowledge of their patron can be gained, powerful loot obtained, secrets of their cult uncovered, and a chance to seize godly power for themselves unveiled.";
+		-- "Breeder Cult?":
+			say "     Available solely to Dragon Breeders who have evolved their tail and received their material rewards from Tiamat, the cult along with the Player's temple can be found on Pirate island after a brief visit from the Player's draconic offspring at the Abbey. Note, Pirate island is only discoverable after completing the event Noteinbottle (sic) at the Beach Plaza, speaking to Rod Mallrat in the Smithhaven mall, searching for the event Findingboat (sic) at the beach, and walking between the Quiet Sandbar and Pirate Island tiles. Currently, only the initial sex scenes have and some flavor chat have been added, however repeatedly breeding your followers and Priestess can make it easy to upgrade your temple as new updates come online. Further, there will never be any content available to non-Dragon Breeders or DB's without a pussy. Should you lose your Dragon Breeder form for any reason, simply interacting with the Dragon Pearl will restore your infection.";
 		-- "Hermacore?":
 			say "     A combination of a profoundly vorny TF and potent weapon, the Hermacore form can be obtained after speaking with human Drake about his eyes. Doing so will activate an event called: Old One Eye out in the Dry Plains. Once found, Players with the Vore Pred and UB predator feat will have the option to stealth vore, UB, or fight a manticore with Drake's Knife lodged in its head. Choosing to devour it will cause Players without the safe appetite feat will be fully transformed into a Hermacore, in addition to gaining an item which will TF them into one over time. The infection comes with its own custom heat cycle and feats to help the Player grow more powerful by consuming their foes. Otherwise it's possible to liberate Drake's Blade without corrupting it into the Tainted Blade by unbirthing the manticore, or simply fighting it. Should the player leave them be though, a follow up event will occur in the Last Chance the next time they visit.";
+			project Figure of Hermacore_icon;
 		-- "HELP! I can't have sex with Ava!":
 			say "     Have you tried buying her dinner first? But in all seriousness, here's your Pussy Pass, just don't come at her with a dick again, please.";
 			ItemGain Pussy Pass by 1;
@@ -8625,6 +8634,86 @@ to say SCUse:
 					if "Dominant" is listed in feats of Player:
 						remove "Dominant" from feats of Player;
 					add "Submissive" to feats of Player;
+		-- "Ipotane?":
+			say "     Obtainable at the Palomine, this liminal equine infect evolves as the player has more children as a pure blood Ipotane with a cunt. Note it is heavily advised to have Lilliana (the black equinoid pet) as your active pet during your mifly milk mare adventures. Currently, this content is incomplete due to time constants, yet you can advance your horsy infection here. Beware though, you will need to reset this at later date if you wish to view the content in its entirety.";
+			LineBreak;
+			say "     [italic type]What would you like to do[roman type]?";
+			let my_little_breeder_Choices be a list of text;
+			add "Reset infection?" to my_little_breeder_Choices;
+			add "Advance to stage two?" to my_little_breeder_Choices;
+			add "Go to stage three?" to my_little_breeder_Choices;
+			add "View stage four?" to my_little_breeder_Choices;
+			add "Debug preg quest?" to my_little_breeder_Choices;
+			add "Opps missclicked?" to my_little_breeder_Choices;
+			let my_little_breeder_Choice be what the player chooses from my_little_breeder_Choices;
+			if my_little_breeder_Choice is:
+				-- "Reset infection?":
+					say "     Reset enabled, you are now free to slut around the cabin.";
+					now HP of Best Pony is 0; 
+					now Perception of Best Pony is 0;
+				-- "Advance to stage two?":
+					say "     Layline project command: it was you how broke my Meissen Plate!";
+					now HP of Best Pony is 1; 
+					now Perception of Best Pony is 0;
+				-- "Go to stage three?":
+					say "    Acknowledge, what type of cutie mark would you like on your belly?";
+					let Stupid_stuff_Choices be a list of text;
+					add "A Heart?" to Stupid_stuff_Choices;
+					add "Some Lucky four-leaf clover?" to Stupid_stuff_Choices;
+					add "Perhaps Classical horseshoe?" to Stupid_stuff_Choices;
+					add "Or a Primal paw print?" to Stupid_stuff_Choices;
+					let Stupid_stuff_Choice be what the player chooses from Stupid_stuff_Choices;
+					if Stupid_stuff_Choice is:
+						-- "A Heart?":
+							say "     Very well.";
+							now HP of Best Pony is 2;
+							now Perception of Best Pony is 1;
+						-- "Some Lucky four-leaf clover?":
+							say "     Done.";
+							now HP of Best Pony is 2;
+							now Perception of Best Pony is 2;
+						-- "Perhaps Classical horseshoe?":
+							say "      Deux Ex Pony stuff!";
+							now HP of Best Pony is 2;
+							now Perception of Best Pony is 3;
+						-- "Or a Primal paw print?":
+							say "     Fang will love this, or not, Sunder isn't his mother.";
+							now HP of Best Pony is 2;
+							now Perception of Best Pony is 4;
+				-- "View stage four?":
+					say "     Warning unstable nanites detected, user beware, you're gonna turn into a mare!";
+					LineBreak;
+					say "     [italic type]Please choose your tummy tramp stamp[roman type].";
+					let IDK_Choices be a list of text;
+					add "Heart?" to IDK_Choices;
+					add "Four-leaf clover?" to IDK_Choices;
+					add "Classical horseshoe?" to IDK_Choices;
+					add "Paw print?" to IDK_Choices;
+					let IDK_Choice be what the player chooses from IDK_Choices;
+					if IDK_Choice is:
+						-- "Heart?":
+							say "     Debug complete.";
+							now HP of Best Pony is 3; 
+							now Perception of Best Pony is 1;
+						-- "Four-leaf clover?":
+							say "     Nanites deployed.";
+							now HP of Best Pony is 3;
+							now Perception of Best Pony is 2;
+						-- "Classical horseshoe?":
+							say "     Pony Powers active, form of: error witty line not found.";
+							now HP of Best Pony is 3;
+							now Perception of Best Pony is 3;
+						-- "Paw print?":
+							say "     Something, something ancient memes, something something, pony side!";
+							now HP of Best Pony is 3; 
+							now Perception of Best Pony is 4;
+				-- "Debug preg quest?":
+					say "     Reseting pony timer.";
+					now XP of Best Pony is 0;
+					now Stamina of Best pony is 0;
+					now Perception of Best Pony is 0;
+				-- "Opps missclicked?":
+					say "     Understandable, have a nice day.";
 		-- "Cyn?":
 			say "     Though she is not one of Sundered_Dragon's creations, this glitchy fox herm can be recruited in the Ghost Fair section of the State Fair via walk-in once the Player has reached level 20 and gained the Touched by Madness feat. On arrival to this unusual place, the Player will be assaulted by vulpine Hallucination who, if defeated and fucked several times will join the Player as a potent pet and mobile shopkeeper. Though her little shop of horror may be pricey her services are quite powerful, additionally some of her scenes and items have been Co-authored by Sundered_Dragon. However, should the Player beat her without playing with Cyn too many times, she will become permanently hostile towards them in her own eldritch way.";
 

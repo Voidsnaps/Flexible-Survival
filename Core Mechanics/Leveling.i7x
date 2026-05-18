@@ -9,8 +9,8 @@ To level up:
 	say "You have gained level [level of Player]! Congratulations!";
 	if remainder after dividing level of Player by 2 is 0:
 		say "Current stats:[line break]";
-		say "Strength: [strength of Player], Dexterity: [dexterity of Player], Stamina: [stamina of Player], Charisma: [Charisma of Player], Intelligence: [intelligence of Player], Perception: [perception of Player].";
-		say "Pick a stat to increase.";
+		say "Strength: [strength of Player], Dexterity: [dexterity of Player], Stamina: [stamina of Player], Charisma: [Charisma of Player], Intelligence: [intelligence of Player], Perception: [perception of Player][line break]";
+		say "[line break]Pick a stat to increase.";
 		say "[link]1 - Strength[as]1[end link] - Represents your raw physical might and your ability to deal damage.";
 		say "[link]2 - Dexterity[as]2[end link] - Affects your likelihood to hit and dodge.";
 		say "[link]3 - Stamina[as]3[end link] - Increases your total health pool and your overall endurance.";
@@ -20,22 +20,18 @@ To level up:
 		say "[link]7 - Random[as]7[end link] - Randomize your stat point gain.";
 		now calcnumber is 0;
 		while calcnumber < 1 or calcnumber > 7:
-			say "Choice? (1-7)>[run paragraph on]";
+			say "Choice? (1-7)> [run paragraph on]";
 			get a number;
+		LineBreak;
 		if calcnumber is 7:
 			now calcnumber is a random number between 1 and 6;
-		if calcnumber is 1:
-			StatChange "strength" by 1;
-		else if calcnumber is 2:
-			StatChange "dexterity" by 1;
-		else if calcnumber is 3:
-			StatChange "stamina" by 1;
-		else if calcnumber is 4:
-			StatChange "charisma" by 1;
-		else if calcnumber is 5:
-			StatChange "intelligence" by 1;
-		else if calcnumber is 6:
-			StatChange "perception" by 1;
+		if calcnumber is:
+			-- 1: StatChange "strength" by 1;
+			-- 2: StatChange "dexterity" by 1;
+			-- 3: StatChange "stamina" by 1;
+			-- 4: StatChange "charisma" by 1;
+			-- 5: StatChange "intelligence" by 1;
+			-- 6: StatChange "perception" by 1;
 	else:
 		increase ssstash by 1;
 	increase MaxHP of Player by ( stamina of Player minus 10 ) divided by 2;

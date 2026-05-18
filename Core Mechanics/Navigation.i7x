@@ -90,6 +90,7 @@ Beach Plaza	"Beach Plaza"	"Beach Plaza"	"Seaside"
 Bouncy Castle	"Bouncy Castle"	"Bouncy Castle"	"Seaside"
 Island Pier	"Island Pier"	"Island Pier"	"Seaside"
 Kai's Campsite	"Kai's Campsite"	"Kai's Campsite"	"Seaside"
+Moon Pool	"Moon Pool"	"Moon Pool"	"Seaside"
 Pirate Island	"Pirate Island"	"Pirate Island"	"Seaside"
 Viking Ship	"Viking Ship"	"Viking Ship"	"Seaside"
 Sinking Swamps	"Sinking Swamps"	"Sinking Swamps"	"Swamp"
@@ -102,6 +103,7 @@ Astroslide Football Field	"Astroslide Football Field"	"Astroslide Football Field
 Campus Gym	"Campus Gym"	"Campus Gym"	"Tenvale College"
 Paleontology Office	"Paleontology Office"	"Paleontology Office"	"Tenvale College"
 Phi Iota Gamma	"Phi Iota Gamma"	"Phi Iota Gamma"	"Tenvale College"
+Encampment Tree	"Encampment Tree"	"Encampment Tree"	"Urban Forest"
 Urban Forest	"Urban Forest"	"Urban Forest"	"Urban Forest"
 Ariel's Aria	"Ariel's Aria"	"Ariel's Aria"	"Urban Forest"
 Bunny House	"Bunny House"	"Bunny House"	"Urban Forest"
@@ -139,10 +141,9 @@ to AddNavPoint (RoomObj - room) silence state is (Silence - a number):
 		else: [player doesn't know the room]
 			now RoomObj is known;
 			if Silence is 0:
-				say "[bold type]['][printed name of RoomObj]['][roman type] has been added to your list of available navpoints. You will now be able to [bold type]nav[roman type]igate there from any of the fasttravel locations in the city by using the command [bold type]nav [printed name of RoomObj][roman type].";
+				say "[line break][bold type]['][printed name of RoomObj]['][roman type] has been added to your list of available navpoints. You will now be able to [bold type]navigate[roman type] there from any of the fast travel locations in the city by using the command [bold type]nav [printed name of RoomObj][roman type].";
 
 destinationcheck is an action applying to nothing.
-
 understand "navigate" as destinationcheck.
 understand "nav" as destinationcheck.
 
@@ -168,100 +169,96 @@ carry out destinationcheck:
 	let PrintedUrbanForest be 0;
 	let PrintedWarehouseDistrict be 0;
 	let PrintedZoo be 0;
-	repeat with x running from 1 to the number of rows in the Table of Navigation locations:
-		choose row x in the Table of Navigation locations;
+	repeat through Table of Navigation locations:
 		if RoomObject entry is known:
+			linkfind "nav [NavText entry]"; [sets hyperindex to the existing or added entry matching text]
 			if NavList entry is:
 				-- "Primary Rooms":
-					say "[if PrintedPrimaryRooms is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedPrimaryRooms is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedPrimaryRooms;
 				-- "Capitol District":
-					say "[if PrintedCapitolDistrict is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedCapitolDistrict is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedCapitolDistrict;
 				-- "Central City":
-					say "[if PrintedCentralCity is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedCentralCity is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedCentralCity;
 				-- "City Park":
-					say "[if PrintedCityPark is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedCityPark is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedCityPark;
 				-- "Commercial District":
-					say "[if PrintedCommercialDistrict is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedCommercialDistrict is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedCommercialDistrict;
 				-- "Dry Plains":
-					say "[if PrintedDryPlains is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedDryPlains is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedDryPlains;
 				-- "Fairgrounds":
-					say "[if PrintedFairgrounds is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedFairgrounds is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedFairgrounds;
 				-- "High Rise District":
-					say "[if PrintedHighRiseDistrict is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedHighRiseDistrict is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedHighRiseDistrict;
 				-- "Hospital":
-					say "[if PrintedHospital is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedHospital is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedHospital;
 				-- "Industrial Sector":
-					say "[if PrintedIndustrialSector is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedIndustrialSector is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedIndustrialSector;
 				-- "Junkyard":
-					say "[if PrintedJunkyard is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedJunkyard is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedJunkyard;
 				-- "Misc":
-					say "[if PrintedMisc is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedMisc is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedMisc;
 				-- "Museum":
-					say "[if PrintedMuseum is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedMuseum is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedMuseum;
 				-- "Red Light District":
-					say "[if PrintedRedLightDistrict is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedRedLightDistrict is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedRedLightDistrict;
 				-- "Seaside":
-					say "[if PrintedSeaside is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedSeaside is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedSeaside;
 				-- "Swamp":
-					say "[if PrintedSwamp is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedSwamp is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedSwamp;
 				-- "The Stables":
-					say "[if PrintedTheStables is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedTheStables is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedTheStables;
 				-- "Tenvale College":
-					say "[if PrintedTenvaleCollege is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedTenvaleCollege is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedTenvaleCollege;
 				-- "Urban Forest":
-					say "[if PrintedUrbanForest is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedUrbanForest is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedUrbanForest;
 				-- "Warehouse District":
-					say "[if PrintedWarehouseDistrict is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedWarehouseDistrict is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedWarehouseDistrict;
 				-- "Zoo":
-					say "[if PrintedZoo is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][link][bracket][RoomName entry][close bracket][as]nav [NavText entry][end link]";
+					say "[if PrintedZoo is 0][line break][bold type][NavList entry][roman type]: [else] | [end if][set link hyperindex][bracket][RoomName entry][close bracket][terminate link]";
 					increment PrintedZoo;
 	LineBreak;
 
 navigating is an action applying to one thing.
-
-understand "navigate [any known fasttravel room]" as navigating.
-understand "navigate to [any known fasttravel room]" as navigating.
-understand "nav [any known fasttravel room]" as navigating.
-understand "nav to [any known fasttravel room]" as navigating.
-understand "travel [any known fasttravel room]" as navigating.
-understand "travel to [any known fasttravel room]" as navigating.
+understand "navigate to/-- [any known fasttravel room]" as navigating.
+understand "nav to/-- [any known fasttravel room]" as navigating.
+understand "travel to/-- [any known fasttravel room]" as navigating.
 understand "go to [any known fasttravel room]" as navigating.
 understand "return to [any known fasttravel room]" as navigating.
 
-carry out navigating:
+check navigating:
 	if location of Player is not fasttravel:
-		say "You can't navigate from here.";
-		stop the action;
+		say "You can't navigate from here." instead;
 	if noun is location of Player:
-		say "You're already there.";
-		stop the action;
+		say "You're already here." instead;
+
+carry out navigating:
 	now Player is in Traveling;
 	if companionList of Player is not empty:
 		repeat with y running through companionList of Player:
 			if NPCObject of y is not Nullpet:
 				now NPCObject of y is in location of Player;
 	follow turnpass rule;
-	let the bonus be (( Perception of Player minus 10 ) divided by 2);
+	let the bonus be ( Perception of Player minus 10 ) divided by 2;
 	now battleground is "Outside";
 	if a random number from 1 to 20 < 10 minus bonus and battleground is not "void":
 		if there is a area of Battleground in the Table of Random Critters:
@@ -277,7 +274,7 @@ carry out navigating:
 	NavInEvent_Check noun;
 	now inasituation is false; [cleaning up possible open ended flags]
 
-NavCheckReturn is a truth state that varies.
+NavCheckReturn is a truth state that varies.[@Tag:NotSaved]
 
 to say NavCheck (CheckRoom - a room): [check if a nav attempt can go through]
 	if debugactive is 1:

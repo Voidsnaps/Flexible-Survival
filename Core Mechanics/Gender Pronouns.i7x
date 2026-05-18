@@ -95,26 +95,18 @@ Section 3 - Plurals
 to say smn: [stick an s on if multiple male - noun]
 	if Cock Count of Player > 1:
 		say "s";
-	else:
-		say "";
 
 to say sfn: [stick an s on if multiple female - noun]
 	if Cunt Count of Player > 1:
 		say "s";
-	else:
-		say "";
 
 to say esmn: [stick an es on if multiple male - noun]
 	if Cock Count of Player > 1:
 		say "es";
-	else:
-		say "";
 
 to say esfn: [stick an es on if multiple female - noun]
 	if Cunt Count of Player > 1:
 		say "es";
-	else:
-		say "";
 
 to say ymn: [sticks y/ies on if multiple male - noun]
 	if Cock Count of Player > 1:
@@ -129,27 +121,19 @@ to say yfn: [sticks y/ies on if multiple female - noun]
 		say "y";
 
 to say smv: [stick an s on if single male - verb]
-	if Cock Count of Player > 1:
-		say "";
-	else:
+	if Cock Count of Player < 2:
 		say "s";
 
 to say sfv: [stick an s on if single female - verb]
-	if Cunt Count of Player > 1:
-		say "";
-	else:
+	if Cunt Count of Player < 2:
 		say "s";
 
 to say esmv: [stick an es on if single male - verb]
-	if Cock Count of Player > 1:
-		say "";
-	else:
+	if Cock Count of Player < 2:
 		say "es";
 
 to say esfv: [stick an es on if single female - verb]
-	if Cunt Count of Player > 1:
-		say "";
-	else:
+	if Cunt Count of Player < 2:
 		say "es";
 
 to say ymv: [sticks y/ies on if single male - verb]
@@ -346,13 +330,7 @@ to setmongender (x - a number):
 		neutpronouns;
 
 to say mongendernum (x - a number):
-	now mongender of currentmonster is x;
-	if currentmonster is malepro:
-		malepronouns;
-	else if currentmonster is femalepro:
-		femalepronouns;
-	else:
-		neutpronouns;
+	setmongender x;
 
 Definition: currentmonster is malepro: [creature referred to as male]
 	if mongender of currentmonster is 1, yes;
@@ -463,7 +441,7 @@ Definition: currentmonster is cunted: [Female, herm, m-herm, cuntboy]
 	no;
 
 monnumtesting is an action applying to nothing.
-understand "monnum" as monnumtesting;
+understand "monnum" as monnumtesting.
 
 carry out monnumtesting:
 	say "Monster gender is [mongender of currentmonster] - [if currentmonster is neuterX]neuterX[else if currentmonster is neuterM]neuterM[else if currentmonster is neuterF]neuterF[else if currentmonster is male]male[else if currentmonster is female]female[else if currentmonster is herm]herm[else if currentmonster is shemale]shemale[else if currentmonster is mherm]mherm[else if currentmonster is cuntboy]cuntboy[else if currentmonster is variable]variable[end if].";
@@ -575,12 +553,12 @@ To SetNeutralPronouns for (x - a person):
 	now ObjectPro of x is "them";
 	now PosAdj of x is "their";
 	now PosPro of x is "theirs";
-	now ReflexPro of x is "themselves";
+	now ReflexPro of x is "themself";
 	now SubjectProCap of x is "They";
 	now ObjectProCap of x is "Them";
 	now PosAdjCap of x is "Their";
 	now PosProCap of x is "Theirs";
-	now ReflexProCap of x is "Themselves";
+	now ReflexProCap of x is "Themself";
 	now PronounSet of x is "Neutral";
 
 This is the SetPlayerPronouns rule:
@@ -603,7 +581,7 @@ This is the SetPlayerPronouns rule:
 				SetMalePronouns for player;
 			else if Player is female:
 				SetFemalePronouns for player;
-			else if Player is neuter:
+			else:
 				SetNeutralPronouns for player;
 
 A person can be MProN. A person is usually not MProN.
@@ -627,74 +605,67 @@ Definition: A person (called x) is HProN:
 A person can be NProN. A person is usually not NProN.
 
 Definition: A person (called x) is NProN:
-	if PronounSet of x is "Neuter", yes;
+	if PronounSet of x is "Neutral", yes;
 	no;
 
 A person can be pronounMale. A person is usually not pronounMale.
 
 Definition: A person (called x) is pronounMale:
-	if SubjectPro of Player is "he", yes;
+	if SubjectPro of x is "he", yes;
 	no;
 
 A person can be pronounFemale. A person is usually not pronounFemale.
 
 Definition: A person (called x) is pronounFemale:
-	if SubjectPro of Player is "she", yes;
+	if SubjectPro of x is "she", yes;
 	no;
 
 A person can be pronounHerm. A person is usually not pronounHerm.
 
 Definition: A person (called x) is pronounHerm:
-	if SubjectPro of Player is "shi", yes;
+	if SubjectPro of x is "shi", yes;
 	no;
 
 A person can be pronounNeuter. A person is usually not pronounNeuter.
 
 Definition: A person (called x) is pronounNeuter:
-	if SubjectPro of Player is "it", yes;
+	if SubjectPro of x is "they", yes;
 	no;
 
 [Menu]
 
 pronounsetting is an action applying to nothing.
-
 understand "set pronouns" as pronounsetting.
 understand "pronoun menu" as pronounsetting.
 
 carry out pronounsetting:
-	say "     This menu allows you to set how the game will refer to you, the player, when referring to you in the third person. This is usually not used as the game mostly refers to the player in 2nd person, but this option will determine how it's handled in conversations between NPCs, for example. This menu can be called again in game with [bold type]pronoun menu[roman type]. [line break]";
-	say "Current Pronoun Choice: [bold type][PronounChoice of Player][roman type] - [SubjectPro of Player]/[PosAdj of Player][line break]";
-	say "[link](1) Auto[as]1[end link] - Game will decide pronouns based on current body configuration.";
-	say "[link](2) Male[as]2[end link] - Game will always use He/His/Him/Himself pronouns for the player.";
-	say "[link](3) Female[as]3[end link] - Game will always use She/Her/Her/Herself pronouns for the player.";
-	say "[link](4) Herm[as]4[end link] - Game will always use Shi/Hir/Hir/Hirself pronouns for the player.";
-	say "[link](5) Neutral[as]5[end link] - Game will always use They/Their/Them/Themselves pronouns for the player.";
-	say "[link](0) Exit[as]0[end link][line break]";
+	say "     This menu allows you to set how the game will refer to you, the player, when referring to you in the third person. This is usually not used as the game mostly refers to the player in 2nd person, but this option will determine how it's handled in conversations between NPCs, for example. This menu can be called again in game with [bold type]pronoun menu[roman type].";
+	say "[line break]Current Pronoun Choice: [bold type][PronounChoice of Player][roman type] - [SubjectPro of Player]/[PosAdj of Player][line break]";
+	say "(1) [link]Auto[as]1[end link] - Game will decide pronouns based on current body configuration.";
+	say "(2) [link]Male[as]2[end link] - Game will always use He/His/Him/Himself pronouns for the player.";
+	say "(3) [link]Female[as]3[end link] - Game will always use She/Her/Her/Herself pronouns for the player.";
+	say "(4) [link]Herm[as]4[end link] - Game will always use Shi/Hir/Hir/Hirself pronouns for the player.";
+	say "(5) [link]Neutral[as]5[end link] - Game will always use They/Their/Them/Themselves pronouns for the player.";
+	say "(0) [link]Exit[as]0[end link][line break]";
 	now calcnumber is -1;
 	while calcnumber < 0 or calcnumber > 5:
 		say "Choice? (0-5)> [run paragraph on]";
 		get a number;
 		if calcnumber is:
-			-- 1:
-				now PronounChoice of Player is "Auto";
-			-- 2:
-				now PronounChoice of Player is "Male";
-			-- 3:
-				now PronounChoice of Player is "Female";
-			-- 4:
-				now PronounChoice of Player is "Herm";
-			-- 5:
-				now PronounChoice of Player is "Neutral";
-			-- otherwise:
-				say "Invalid choice. Pick from 0 to 5.";
+			-- 0: break;
+			-- 1: now PronounChoice of Player is "Auto";
+			-- 2: now PronounChoice of Player is "Male";
+			-- 3: now PronounChoice of Player is "Female";
+			-- 4: now PronounChoice of Player is "Herm";
+			-- 5: now PronounChoice of Player is "Neutral";
+			-- otherwise: say "Invalid choice. Pick from 0 to 5.";
+	follow the SetPlayerPronouns rule;
 	if PronounChoice of Player is not "Auto":
 		say "You are now set to [PronounChoice of Player] pronouns.";
 	else:
 		say "You are now set to automatic pronoun handling.";
-	follow the SetPlayerPronouns rule;
 
 pronountesting is an action applying to nothing.
-
 understand "testpronouns" as pronountesting.
 
 carry out pronountesting:
@@ -768,7 +739,6 @@ to say dude:
 	else:
 		say "dude";
 
-
 [Being verbs]
 
 to say isare:
@@ -799,6 +769,5 @@ To say ObjectProCap: say "[ObjectProCap of Player]";
 To say PosAdjCap: say "[PosAdjCap of Player]";
 To say PosProCap: say "[PosProCap of Player]";
 To say ReflexProCap: say "[ReflexProCap of Player]";
-
 
 Gender Pronouns ends here.
